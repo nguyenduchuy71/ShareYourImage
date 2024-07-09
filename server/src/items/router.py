@@ -2,8 +2,7 @@ import os
 from fastapi import APIRouter, Depends, status, HTTPException, UploadFile, File
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
-from firebase_admin import credentials, storage
-from pathlib import Path
+from firebase_admin import storage
 from auth.utills import get_current_user
 from firebase.storage import upload_file, remove_file
 from items.controller import get_user, get_user_item, delete_user_item, share_friend_item, create_user_item
@@ -49,14 +48,15 @@ def post_collections(files: list[UploadFile] = File(...), db: Session = Depends(
         return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
 
 @router.delete("/{ownerId}/{imagePath}")
-def delete_collections(ownerId:str, imagePath:str , db:Session = Depends(get_db), current_user = Depends(get_current_user)):
+def delete_collections(ownerId:str, imagePath:str, srcImage:str = '', db:Session = Depends(get_db), current_user = Depends(get_current_user)):
     try:
         db_user = get_user(db, user_id=current_user.id)
         if db_user is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User not found")
-        delete_user_item(db=db, ownerId=ownerId, itemPath=imagePath)
-        blob_path = f"{ownerId}/{imagePath}"
-        remove_file(bucket, blob_path)
+        db_item = delete_user_item(db=db, ownerId=ownerId, itemPath=imagePath, srcImage=srcImage)
+        if db_item:
+            blob_path = f"{ownerId}/{imagePath}"
+            remove_file(bucket, blob_path)
         return status.HTTP_204_NO_CONTENT
     except Exception as error:
         # logger.error(error)

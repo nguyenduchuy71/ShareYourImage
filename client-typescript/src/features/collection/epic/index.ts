@@ -81,13 +81,16 @@ export const useCollectionStore = create<ICollectionStore>((set, get) => ({
       handleErrorStatus(error);
     }
   },
-  deteleCollectionEpic: async (imagePath: string) => {
+  deteleCollectionEpic: async (imagePath: string, srcImage: string) => {
     try {
       const accessToken = sessionStorage.getItem('auth');
       const headers = configHeaders(accessToken);
-      const res = await axios.delete(`${BASEURL}/items/${imagePath}`, {
-        headers,
-      });
+      const res = await axios.delete(
+        `${BASEURL}/items/${imagePath}?srcImage=${encodeURIComponent(srcImage)}`,
+        {
+          headers,
+        },
+      );
       if (res.data === 204) {
         const updateCollections = get().collections.filter(
           (collection) => collection.fullPath !== imagePath,

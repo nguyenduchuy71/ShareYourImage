@@ -1,3 +1,4 @@
+import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,10 +7,20 @@ from auth.router import router as authRouter
 from notify.router import router as notifyRouter
 from items.router import router as itemRouter
 from db import database
+from apitally.fastapi import ApitallyMiddleware
+from dotenv import load_dotenv
 
 database.Base.metadata.create_all(bind=database.engine)
 
+load_dotenv()
+APITALLY_KEY = os.getenv('APITALLY_KEY')
+
 app = FastAPI()
+app.add_middleware(
+    ApitallyMiddleware,
+    client_id="APITALLY_KEY",
+    env="dev",
+)
 
 app.add_middleware(
     CORSMiddleware,

@@ -61,8 +61,8 @@ function CollectionScreen() {
     setSelectedItem(collection);
   };
 
-  const handleDeleteCollection = (imagePath) => {
-    deteleCollectionEpic(imagePath);
+  const handleDeleteCollection = (imagePath, srcImage) => {
+    deteleCollectionEpic(imagePath, srcImage);
   };
 
   const handleShareImage = (item, friendId) => {
@@ -112,7 +112,7 @@ function CollectionScreen() {
                   return (
                     <div key={collection.fullPath} className="relative">
                       <XCircleIcon
-                        onClick={() => handleDeleteCollection(collection.fullPath)}
+                        onClick={() => handleDeleteCollection(collection.fullPath, collection.srcImage)}
                         className="w-5 h-5 cursor-pointer absolute right-0 bottom-full hover:opacity-70"
                       />
                       <div onClick={() => handleSelectedItem(collection)}>

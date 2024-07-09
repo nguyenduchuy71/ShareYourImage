@@ -24,6 +24,6 @@ export interface ICollectionStore {
   error: any;
   getCollectionEpic: () => void;
   uploadCollectionEpic: (userUpdate: any) => void;
-  deteleCollectionEpic: (imageId: string) => void;
+  deteleCollectionEpic: (imageId: string, srcImage: string) => void;
   shareImageEpic: (item: any, friendId: string) => void;
 }

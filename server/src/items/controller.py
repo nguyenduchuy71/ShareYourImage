@@ -9,11 +9,14 @@ def get_user(db: Session, user_id: str):
 def get_user_item(db: Session, user_id: str):
     return db.query(Item).order_by(Item.createdAt.desc()).filter(Item.owner_id == user_id).all()
 
-def delete_user_item(db: Session, ownerId:str, itemPath: str):
-    db_item = db.query(Item).filter(Item.owner_id==ownerId).filter(Item.title==itemPath).first()
+def delete_user_item(db: Session, ownerId:str, itemPath: str, srcImage:str):
+    db_item = db.query(Item).filter(Item.owner_id==ownerId).filter(Item.title == itemPath).first()
+    db_item_share = db.query(UserShareItem).filter(UserShareItem.owner_id==ownerId).filter(UserShareItem.imageShare==srcImage).first()
     if db_item:
         db.delete(db_item)
-        db.commit()
+    if db_item_share:
+        db.delete(db_item_share)
+    db.commit()
     return db_item
 
 def share_friend_item(db: Session, user_id: str, friend_id: str, srcImage: str):
