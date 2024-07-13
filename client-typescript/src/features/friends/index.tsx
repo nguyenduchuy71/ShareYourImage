@@ -91,12 +91,12 @@ function FriendScreen({ socket }) {
                 <div className="flex flex-wrap flex-end items-center justify-center">
                   {!friendIds.includes(friend.id) ? (
                     <div className="ml-8">
-                      {friend.friends.findIndex((item) => item.friend_id === authInfo.userId) !==
+                      {friend.friends.findIndex((item) => item.friendId === authInfo.userId) !==
                       -1 ? (
                         <div>
                           {friend.friends
-                            .filter((item) => item.friend_id === authInfo.userId)
-                            .findIndex((item) => item.is_accept_friend) === -1 ? (
+                            .filter((item) => item.friendId === authInfo.userId)
+                            .findIndex((item) => item.isAccepted) === -1 ? (
                             <ButtonItem
                               typeButton="button"
                               classNameValue="rounded-md w-20 bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-80"

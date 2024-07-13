@@ -12,18 +12,18 @@ class Item(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
     title = Column(String, index=True)
-    owner_id = Column(String, ForeignKey("users.id"), index=True)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
+    userId = Column(String, ForeignKey("users.id"), index=True)
+    createdTime = Column(DateTime, default=datetime.datetime.utcnow)
 
-    owner = relationship("User", back_populates="items")
+    user = relationship("User", back_populates="items")
 
 class UserShareItem(Base):
     __tablename__ = "usershareitems"
 
     id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
-    owner_id = Column(String, ForeignKey("users.id"), index=True)
-    friend_id = Column(String, index=True)
-    imageShare = Column(String, index=True)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
-    
-    owner = relationship("User", back_populates="usershareitems")
+    userId = Column(String, ForeignKey("users.id"), index=True)
+    friendId = Column(String, index=True)
+    pathImageShare = Column(String, index=True)
+    createdTime = Column(DateTime, default=datetime.datetime.utcnow)
+
+    user = relationship("User", back_populates="usershareitems")

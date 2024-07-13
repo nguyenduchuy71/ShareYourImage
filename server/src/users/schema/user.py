@@ -15,7 +15,7 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
     id: str
-    is_active: bool
+    isActive: bool
     username: str
     bio: str
     avatar: str

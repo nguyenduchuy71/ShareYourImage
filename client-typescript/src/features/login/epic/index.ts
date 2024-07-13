@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import axios from 'axios';
+import { create } from 'zustand';
 import { triggerNotify } from '@/utils/messages';
 import { IAuthenStore } from './interface';
 const BASEURL = `http://localhost:${import.meta.env.VITE_BACKEND_PORT}`;
@@ -9,29 +9,42 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
   authToken: null,
   error: null,
   loginEpic: async (credentials: any) => {
-    const res = await axios.post(`${BASEURL}/login`, credentials);
-    const userInfo = JSON.stringify({
-      email: credentials.email,
-      userId: res.data.userId,
-    });
-    sessionStorage.setItem('userInfo', userInfo);
-    sessionStorage.setItem('auth', res.data.token);
-    set({ authToken: res.data.token });
-    set({ authInfo: userInfo });
-    triggerNotify('Login successful');
+    try {
+      const res = await axios.post(`${BASEURL}/login`, credentials);
+      const userInfo = JSON.stringify({
+        email: credentials.email,
+        userId: res.data.userId,
+      });
+      sessionStorage.setItem('userInfo', userInfo);
+      sessionStorage.setItem('auth', res.data.token);
+      set({ authToken: res.data.token });
+      set({ authInfo: userInfo });
+      triggerNotify('Login successful');
+    } catch (error) {
+      set({ error });
+    }
   },
   signUpEpic: async (credentials: any) => {
-    const res = await axios.post(`${BASEURL}/signup`, credentials);
-    const userInfo = JSON.stringify({
-      email: credentials.email,
-      userId: res.data.userId,
-    });
+    try {
+      let message = 'Sign up successful';
+      const res = await axios.post(`${BASEURL}/signup`, credentials);
+      if (res.data.status_code === 200) {
+        const userInfo = JSON.stringify({
+          email: credentials.email,
+          userId: res.data.userId,
+        });
 
-    sessionStorage.setItem('userInfo', userInfo);
-    sessionStorage.setItem('auth', res.data.token);
-    set({ authToken: res.data.token });
-    set({ authInfo: userInfo });
-    triggerNotify('Sign up successful');
+        sessionStorage.setItem('userInfo', userInfo);
+        sessionStorage.setItem('auth', res.data.token);
+        set({ authToken: res.data.token });
+        set({ authInfo: userInfo });
+      } else if (res.data.status_code === 400) {
+        message = res.data.detail;
+      }
+      triggerNotify(message);
+    } catch (error) {
+      set({ error });
+    }
   },
   logoutEpic: () => {
     sessionStorage.removeItem('userInfo');

@@ -45,8 +45,8 @@ function MainScreen() {
                   return (
                     <div key={image.id}>
                       <ImageItem
-                        imageSrc={image.imageShare}
-                        imageAlt={image.imageShare}
+                        imageSrc={image.pathImageShare}
+                        imageAlt={image.pathImageShare}
                         isSelected={true}
                       />
                     </div>

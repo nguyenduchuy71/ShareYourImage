@@ -6,6 +6,5 @@ class Token(BaseModel):
     token_type: str
     userId: str
 
-
 class TokenData(BaseModel):
     id: Optional[str] = None

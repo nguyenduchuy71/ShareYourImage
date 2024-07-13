@@ -3,7 +3,7 @@ export const handleUpdateFriend = (listFriend: any[], userEmail: string) => {
   const listFriendId = [];
   Object.keys(ids).forEach((key) => {
     Object.keys(ids[key]).forEach((keyItem) => {
-      listFriendId.push(ids[key][keyItem]['friend_id']);
+      listFriendId.push(ids[key][keyItem]['friendId']);
     });
   });
   return listFriendId;

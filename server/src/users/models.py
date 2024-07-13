@@ -12,27 +12,27 @@ class User(Base):
 
     id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    hashedPassword = Column(String)
     username = Column(String, index=True, default="")
     bio = Column(String, default="")
     avatar = Column(String, default="https://github.com/shadcn.png")
-    is_active = Column(Boolean, default=True)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
+    isActive = Column(Boolean, default=True)
+    createdTime = Column(DateTime, default=datetime.datetime.utcnow)
+    role = Column(String, default="user")
 
-    items = relationship("Item", back_populates="owner")
-    friends = relationship("Friend", back_populates="owner")
-    notifies = relationship("Notify", back_populates="owner")
-    usershareitems = relationship("UserShareItem", back_populates="owner")
+    items = relationship("Item", back_populates="user")
+    friends = relationship("Friend", back_populates="user")
+    notifies = relationship("Notify", back_populates="user")
+    usershareitems = relationship("UserShareItem", back_populates="user")
 
 class Friend(Base):
     __tablename__ = "friends"
 
     id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
-    owner_id = Column(String, ForeignKey("users.id"), index=True)
-    friend_id = Column(String, index=True)
-    createdAt = Column(DateTime, default=datetime.datetime.utcnow)
-    is_add_friend = Column(Boolean, default=False)
-    is_accept_friend = Column(Boolean, default=False)
+    userId = Column(String, ForeignKey("users.id"), index=True)
+    friendId = Column(String, index=True)
+    createdTime = Column(DateTime, default=datetime.datetime.utcnow)
+    isAdded = Column(Boolean, default=False)
+    isAccepted = Column(Boolean, default=False)
     
-    owner = relationship("User", back_populates="friends")
-
+    user = relationship("User", back_populates="friends")

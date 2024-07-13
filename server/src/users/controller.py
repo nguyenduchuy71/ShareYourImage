@@ -5,66 +5,66 @@ from users.models import User, Friend
 from items.models import Item, UserShareItem
 from items.schema import ItemCreate
 from notify.models import Notify
-from auth.utills import hash_password
+from auth.utills import handleHashPassWord
 
-def get_user_by_email(db: Session, email: str):
+def getUserByEmail(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
-def get_user(db: Session, user_id: str):
+def getUser(db: Session, user_id: str):
     return db.query(User).filter(User.id == user_id).first()
 
-def get_users(db: Session, skip: int = 0, limit: int = 100, user_id=None):
+def getAllUsers(db: Session, skip: int = 0, limit: int = 100, user_id=None):
     return db.query(User).filter(User.id != user_id).offset(skip).limit(limit).all()
 
-def get_friends_by_user(db: Session, user_id: str):
-    friends = db.query(Friend).filter(or_(Friend.owner_id == user_id, Friend.friend_id == user_id)).all()
+def getFriendsByUser(db: Session, user_id: str):
+    friends = db.query(Friend).filter(or_(Friend.userId == user_id, Friend.friendId == user_id)).all()
     ids = []
     for friend in friends:
-        if user_id != friend.owner_id:
-            ids.append(friend.owner_id)
-        elif user_id != friend.friend_id:
-            ids.append(friend.friend_id)
+        if user_id != friend.userId:
+            ids.append(friend.userId)
+        elif user_id != friend.friendId:
+            ids.append(friend.friendId)
     return db.query(User).filter(User.id.in_(set(ids))).all()
 
-def create_user(db: Session, user: user.UserCreate):
-    hashed_password = hash_password(user.password)
-    db_user = User(email=user.email, hashed_password=hashed_password, username=user.email)
-    db.add(db_user)
+def createUser(db: Session, user: user.UserCreate):
+    hashed_password = handleHashPassWord(user.password)
+    userInfo = User(email=user.email, hashedPassword=hashed_password, username=user.email)
+    db.add(userInfo)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(userInfo)
+    return userInfo
 
-def create_user_item(db: Session, item: ItemCreate, user_id: str):
-    db_item = db.query(Item).filter(Item.owner_id == user_id).filter(Item.title == item['title']).first()
-    if not db_item:
-        db_item = Item(**item, owner_id=user_id)
-        db.add(db_item)
+def createUserItem(db: Session, item: ItemCreate, user_id: str):
+    itemInfo = db.query(Item).filter(Item.userId == user_id).filter(Item.title == itemInfo.title).first()
+    if not itemInfo:
+        itemInfo = Item(**itemInfo, userId=user_id)
+        db.add(itemInfo)
         db.commit()
-        db.refresh(db_item)
-    return db_item
+        db.refresh(itemInfo)
+    return itemInfo
 
-def add_friend(db: Session, owner: User, friend_id: str):
-    db_friend = Friend(friend_id=friend_id, owner_id=owner.id, is_add_friend=True)
-    db_notify = Notify(owner_id=friend_id, content=f"{owner.username} want to add friend with you")
-    db.add(db_friend)
-    db.add(db_notify)
+def addFriend(db: Session, owner: User, friend_id: str):
+    friendInfo = Friend(friendId=friend_id, userId=owner.id, isAdded=True)
+    notifyInfo = Notify(userId=friend_id, content=f"{owner.username} want to add friend with you")
+    db.add(friendInfo)
+    db.add(notifyInfo)
     db.commit()
-    db.refresh(db_friend)
-    db.refresh(db_notify)
-    return db_friend
+    db.refresh(friendInfo)
+    db.refresh(notifyInfo)
+    return friendInfo
 
-def accept_friend(db: Session, owner: User, friend_id: str):
-    friend = db.query(Friend).filter(Friend.owner_id==friend_id).filter(Friend.friend_id==owner.id).first()
+def acceptFriend(db: Session, owner: User, friend_id: str):
+    friend = db.query(Friend).filter(Friend.userId==friend_id).filter(Friend.friendId==owner.id).first()
     if friend:
-        friend.is_accept_friend = True
-        notify = Notify(owner_id=friend_id, content=f"{friend_id} accpeted your friend invite")
+        friend.isAccepted = True
+        notify = Notify(userId=friend_id, content=f"{friend_id} accpeted your friend invite")
         db.add(notify)
         db.commit()
         db.refresh(friend)
         db.refresh(notify)
     return friend
 
-def update_user_info(db: Session, userUpdate: user.UserUpdate, user:user.User):
+def updateUserInfo(db: Session, userUpdate: user.UserUpdate, user:user.User):
     user.bio = userUpdate.bio
     user.username = userUpdate.username
     user.avatar = userUpdate.avatar
@@ -72,7 +72,7 @@ def update_user_info(db: Session, userUpdate: user.UserUpdate, user:user.User):
     db.refresh(user)
     return user
 
-def get_share_friend_item(db: Session, user_id: str, friend_id: str):
-    listUserShareOwner = db.query(UserShareItem).filter(UserShareItem.owner_id==user_id).filter(UserShareItem.friend_id==friend_id).all()
-    listUserShareFriend = db.query(UserShareItem).filter(UserShareItem.owner_id==friend_id).filter(UserShareItem.friend_id==user_id).all()
+def getShareFriendItem(db: Session, user_id: str, friend_id: str):
+    listUserShareOwner = db.query(UserShareItem).filter(UserShareItem.userId==user_id).filter(UserShareItem.friendId==friend_id).all()
+    listUserShareFriend = db.query(UserShareItem).filter(UserShareItem.userId==friend_id).filter(UserShareItem.friendId==user_id).all()
     return list(set(listUserShareOwner + listUserShareFriend))

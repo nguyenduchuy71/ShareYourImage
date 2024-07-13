@@ -25,13 +25,13 @@ export const useFriendStore = create<IFriendStore>((set) => ({
       handleErrorStatus(error);
     }
   },
-  addFriendEpic: async (friend_id: string) => {
+  addFriendEpic: async (friendId: string) => {
     try {
       const accessToken = sessionStorage.getItem('auth');
       const headers = configHeaders(accessToken);
       const res = await axios.post(
         `${BASEURL}/users/addfriend`,
-        { friend_id: friend_id },
+        { friendId },
         {
           headers: headers,
         },
@@ -47,13 +47,13 @@ export const useFriendStore = create<IFriendStore>((set) => ({
       handleErrorStatus(error);
     }
   },
-  acceptFriendEpic: async (friend_id: string) => {
+  acceptFriendEpic: async (friendId: string) => {
     try {
       const accessToken = sessionStorage.getItem('auth');
       const headers = configHeaders(accessToken);
       const res = await axios.post(
         `${BASEURL}/users/acceptfriend`,
-        { friend_id: friend_id },
+        { friendId },
         {
           headers: headers,
         },

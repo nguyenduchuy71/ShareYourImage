@@ -5,41 +5,41 @@ import {
   UsersIcon,
   ArrowLeftEndOnRectangleIcon,
   BellAlertIcon,
-} from "@heroicons/react/24/solid";
-import { useAuthStore } from "../features/login/epic";
-import { CustomIconItem } from "./CustomIconItem";
+} from '@heroicons/react/24/solid';
+import { useAuthStore } from '../features/login/epic';
+import { CustomIconItem } from './CustomIconItem';
 
 export function Sidebar() {
   const [logoutEpic] = useAuthStore((state: any) => [state.logoutEpic]);
   const listMenu = [
     {
-      name: "Send images",
+      name: 'Send images',
       icon: ForwardIcon,
-      path: "/",
+      path: '/',
     },
     {
-      name: "Collection",
+      name: 'Collection',
       icon: FolderIcon,
-      path: "/collection",
+      path: '/collection',
     },
     {
-      name: "Profile",
+      name: 'Profile',
       icon: UserCircleIcon,
-      path: "/profile",
+      path: '/profile',
     },
     {
-      name: "Friends",
+      name: 'Friends',
       icon: UsersIcon,
-      path: "/friends",
+      path: '/friends',
     },
     {
-      name: "Notify",
+      name: 'Notify',
       icon: BellAlertIcon,
-      path: "/notifications",
+      path: '/notifications',
     },
   ];
   return (
-    <div className="sticky top-0 h-[calc(100vh)] w-[16rem] bg-slate-800 text-white p-2 shadow-xl shadow-blue-gray-900/5">
+    <div className="sticky top-0 h-[calc(100vh)] w-[12rem] bg-slate-800 text-white p-2 shadow-xl shadow-blue-gray-900/5">
       <div className="flex flex-col">
         {listMenu.map((menu) => (
           <div key={menu.name} className="p-3 hover:bg-slate-600 rounded-md">

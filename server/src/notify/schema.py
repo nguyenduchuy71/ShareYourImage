@@ -6,8 +6,8 @@ class NotifyBase(BaseModel):
 
 class Notify(NotifyBase):
     id: str
-    createdAt: datetime
-    is_readed: bool
+    createdTime: datetime
+    isReaded: bool
 
     class Config:
         from_attributes = True

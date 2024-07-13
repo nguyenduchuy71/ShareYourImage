@@ -7,30 +7,30 @@ def get_user(db: Session, user_id: str):
     return db.query(User).filter(User.id == user_id).first()
 
 def get_user_item(db: Session, user_id: str):
-    return db.query(Item).order_by(Item.createdAt.desc()).filter(Item.owner_id == user_id).all()
+    return db.query(Item).order_by(Item.createdTime.desc()).filter(Item.userId == user_id).all()
 
 def delete_user_item(db: Session, ownerId:str, itemPath: str, srcImage:str):
-    db_item = db.query(Item).filter(Item.owner_id==ownerId).filter(Item.title == itemPath).first()
-    db_item_share = db.query(UserShareItem).filter(UserShareItem.owner_id==ownerId).filter(UserShareItem.imageShare==srcImage).first()
-    if db_item:
-        db.delete(db_item)
-    if db_item_share:
-        db.delete(db_item_share)
+    item = db.query(Item).filter(Item.userId==ownerId).filter(Item.title == itemPath).first()
+    itemShare = db.query(UserShareItem).filter(UserShareItem.userId==ownerId).filter(UserShareItem.pathImageShare==srcImage).first()
+    if item:
+        db.delete(item)
+    if itemShare:
+        db.delete(itemShare)
     db.commit()
-    return db_item
+    return item
 
 def share_friend_item(db: Session, user_id: str, friend_id: str, srcImage: str):
-    db_share = UserShareItem(owner_id=user_id, friend_id=friend_id, imageShare=srcImage)
-    db.add(db_share)
+    itemShare = UserShareItem(userId=user_id, friendId=friend_id, pathImageShare=srcImage)
+    db.add(itemShare)
     db.commit()
-    db.refresh(db_share)
-    return db_share
+    db.refresh(itemShare)
+    return itemShare
 
 def create_user_item(db: Session, item: ItemCreate, user_id: str):
-    db_item = db.query(Item).filter(Item.owner_id == user_id).filter(Item.title == item['title']).first()
-    if not db_item:
-        db_item = Item(**item, owner_id=user_id)
-        db.add(db_item)
+    itemInfo = db.query(Item).filter(Item.userId == user_id).filter(Item.title == item.title).first()
+    if not itemInfo:
+        itemInfo = Item(**item, userId=user_id)
+        db.add(itemInfo)
         db.commit()
-        db.refresh(db_item)
-    return db_item
+        db.refresh(itemInfo)
+    return itemInfo

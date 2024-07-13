@@ -15,7 +15,7 @@ class ItemCreate(ItemBase):
 
 class Item(ItemBase):
     id: str
-    owner_id: str
+    userId: str
 
     class Config:
         from_attributes = True
