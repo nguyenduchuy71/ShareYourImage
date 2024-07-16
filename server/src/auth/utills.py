@@ -3,12 +3,12 @@ from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
-from dotenv import load_dotenv
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from auth.schema import TokenData
 from db import database
 from users.models import User
+from dotenv import load_dotenv
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')

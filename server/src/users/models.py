@@ -3,14 +3,12 @@ import uuid
 from sqlalchemy import Boolean, Column, ForeignKey, String, DateTime
 from sqlalchemy.orm import relationship
 from db.database import Base
-
-def generate_uuid():
-    return uuid.uuid4()
+from common.helper import Helper
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
+    id = Column(String, primary_key=True, default=lambda: str(Helper.generate_uuid()))
     email = Column(String, unique=True, index=True)
     hashedPassword = Column(String)
     username = Column(String, index=True, default="")
@@ -28,7 +26,7 @@ class User(Base):
 class Friend(Base):
     __tablename__ = "friends"
 
-    id = Column(String, primary_key=True, default=lambda: str(generate_uuid()))
+    id = Column(String, primary_key=True, default=lambda: str(Helper.generate_uuid()))
     userId = Column(String, ForeignKey("users.id"), index=True)
     friendId = Column(String, index=True)
     createdTime = Column(DateTime, default=datetime.datetime.utcnow)

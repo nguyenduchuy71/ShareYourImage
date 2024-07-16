@@ -6,6 +6,7 @@ from users.schema.friend import FriendBase
 from log.logger import logger
 from db.database import get_db
 from auth.utills import getCurrentUser
+from broker.producer_service import send_require_add_friend
 from users.controller import getUserByEmail, createUser, getUser, getAllUsers, getFriendsByUser, createUserItem, addFriend, acceptFriend, updateUserInfo, getShareFriendItem
 
 router = APIRouter(
@@ -80,6 +81,7 @@ def add_Friend(friend: FriendBase, db: Session = Depends(get_db),
         if friendInfo is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Friend not found")
         users = getAllUsers(db)
+        send_require_add_friend(friend)
         return users
     except Exception as error:
         logger.error(error)
@@ -93,6 +95,7 @@ def accept_Friend(friend: FriendBase, db: Session = Depends(get_db),
         if friendInfo is None:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Friend not found")
         users = getAllUsers(db)
+        send_require_add_friend(friend)
         return users
     except Exception as error:
         logger.error(error)

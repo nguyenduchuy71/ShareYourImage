@@ -13,7 +13,7 @@ router = APIRouter(tags=['Authentication'])
 @router.post('/login')
 def login(user_credentials:user.UserLogin, db:Session = Depends(get_db)):
     try:
-        userInfo:User = db.query(User).filter(
+        userInfo = db.query(User).filter(
             User.email == user_credentials.email).first()
         if not userInfo:
             return HTTPException(

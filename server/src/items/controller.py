@@ -27,10 +27,8 @@ def share_friend_item(db: Session, user_id: str, friend_id: str, srcImage: str):
     return itemShare
 
 def create_user_item(db: Session, item: ItemCreate, user_id: str):
-    itemInfo = db.query(Item).filter(Item.userId == user_id).filter(Item.title == item.title).first()
-    if not itemInfo:
-        itemInfo = Item(**item, userId=user_id)
-        db.add(itemInfo)
-        db.commit()
-        db.refresh(itemInfo)
+    itemInfo = Item(**item, userId=user_id)
+    db.add(itemInfo)
+    db.commit()
+    db.refresh(itemInfo)
     return itemInfo
