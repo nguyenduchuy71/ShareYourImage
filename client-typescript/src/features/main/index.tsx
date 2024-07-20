@@ -32,7 +32,7 @@ function MainScreen() {
   }, [getShareItemEpic, selectedFriend]);
 
   return (
-    <div className="w-full mx-auto p-6">
+    <div className="w-[80%] mx-auto p-6">
       {!isLoading ? (
         <div>
           {friends.length > 0 && (

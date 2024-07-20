@@ -1,15 +1,15 @@
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import { ChangeEvent, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ButtonItem } from '@/components/ButtonItem';
 import { ImageItem } from '@/components/ImageItem';
-import { UploadImage } from '@/components/UploadImage';
 import { useCollectionStore } from './epic';
 import { ICollectionStore } from './epic/interface';
-import EmptyData from '@/components/EmptyData';
-import Modal from '@/components/Modal';
 import { IShareStore } from '../main/epic/interface';
 import { useShareStore } from '../main/epic/index';
 import { Loading } from '@/components/Loading';
+import DragDropFileUpload from '@/components/DragDropFileUpload';
+import EmptyData from '@/components/EmptyData';
+import Modal from '@/components/Modal';
 
 function CollectionScreen() {
   const [friends, isLoading, getFriendsEpic] = useShareStore((state: IShareStore) => [
@@ -45,12 +45,6 @@ function CollectionScreen() {
     getFriendsEpic();
   }, [getFriendsEpic, isLoading]);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setFiles(Array.from(e.target.files));
-    }
-  };
-
   const handleUploadFiles = (e) => {
     e.preventDefault();
     uploadCollectionEpic(files);
@@ -74,7 +68,7 @@ function CollectionScreen() {
       <div>
         <p className="mb-4 text-pretty text-lg font-semibold">Upload new images</p>
         <form onSubmit={handleUploadFiles} className="flex flex-col">
-          <UploadImage files={files} handleFileChange={handleFileChange} />
+          <DragDropFileUpload setFiles={setFiles} />
           <div className="mt-4 flex justify-end">
             <ButtonItem
               typeButton="submit"

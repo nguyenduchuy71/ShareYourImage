@@ -67,7 +67,8 @@ def acceptFriend(db: Session, owner: User, friend_id: str):
 def updateUserInfo(db: Session, userUpdate: user.UserUpdate, user:user.User):
     user.bio = userUpdate.bio
     user.username = userUpdate.username
-    user.avatar = userUpdate.avatar
+    if userUpdate.avatar != user.avatar:
+        user.avatar = userUpdate.avatar
     db.commit()
     db.refresh(user)
     return user

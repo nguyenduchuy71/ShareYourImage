@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { useProfileStore } from './epic';
 import { ButtonItem } from '@/components/ButtonItem';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { IProfileStore } from './epic/interface';
 import { CameraIcon } from '@heroicons/react/24/solid';
+import { Input } from '@/components/ui/input';
 
 export default function ProfileScreen() {
   const [username, setUsername] = useState('');
@@ -42,89 +41,121 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="w-full p-6">
-      <div className="border-b border-gray-900/10 pb-12">
-        <div className="flex justify-between items-center">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Profile</h2>
-        </div>
+    <div className="lg:w-[100%] md:w-[90%] xs:w-[96%] mx-auto py-6 dark:bg-gray-900">
+      <div
+        className="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
+        <h1
+          className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2">
+          Profile
+        </h1>
+        <div>
+          <div
+            className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
 
-        <div className="grid grid-cols-2">
-          <div className="flex flex-col lg:col-span-1 sm:col-span-full">
+            <div className="flex justify-center relative">
+              <img
+                src={avatar ? avatar : 'https://github.com/shadcn.png'}
+                className="w-44 h-44 rounded-full object-center inline-block"
+                alt="Avatar"
+              />
+
+              <div className="absolute bottom-0 right-2">
+                <button onClick={handleClick}>
+                  <input
+                    id="upload_profile"
+                    name="file-upload"
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleChangeAvatar}
+                    accept="image/*"
+                    multiple={false}
+                    className="hidden"
+                  />
+                  <CameraIcon className="h-8 w-8 hover:opacity-100 opacity-80 text-amber-500" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
             <div className="w-full">
-              <label className="block text-sm font-medium leading-6 mb-1 text-gray-900">
-                Email
-              </label>
-              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                <Input type="text" name="email" id="email" value={userInfo.email} disabled={true} />
-              </div>
+              <h3 className="mb-2 font-bold">First name</h3>
+              <Input
+                type="text"
+                name="firstname"
+                id="firstname"
+                placeholder="First name"
+              />
             </div>
 
-            <div className="mt-4 w-full">
-              <label className="block text-sm font-medium leading-6 mb-1 text-gray-900">
-                Username
-              </label>
-              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                <Input
-                  type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Username"
-                  onChange={(e: any) => setUsername(e.target.value)}
-                  value={username}
-                />
-              </div>
-            </div>
-
-            <div className="mt-4 w-full">
-              <label className="block text-sm font-medium leading-6 mb-1 text-gray-900">BIO</label>
-              <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                <Textarea
-                  placeholder="Type your bio here."
-                  value={bio}
-                  onChange={(e: any) => setBio(e.target.value)}
-                />
-              </div>
+            <div className="w-full">
+              <h3 className="mb-2 font-bold">Last name</h3>
+              <Input
+                type="text"
+                name="lastname"
+                id="lastname"
+                placeholder="Last name"
+              />
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-between lg:col-span-1 sm:col-span-full">
-            <label className="block text-sm font-medium leading-6 text-gray-900">Avatar</label>
-            <img
-              src={avatar ? avatar : 'https://github.com/shadcn.png'}
-              className="w-48 h-48 rounded-full object-cover inline-block"
-              alt="Avatar"
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
+            <div className="w-full">
+              <h3 className="mb-2 font-bold">Username</h3>
+              <Input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username"
+                onChange={(e: any) => setUsername(e.target.value)}
+                value={username}
+              />
+            </div>
+
+            <div className="w-full">
+              <h3 className="mb-2 font-bold">Bio</h3>
+              <Input
+                type="text"
+                name="bio"
+                id="bio"
+                placeholder="Type your bio here."
+                value={bio}
+                onChange={(e: any) => setBio(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
+            <div className="w-full">
+              <h3 className="mb-2 font-bold">Sex</h3>
+              <select
+                className="w-full rounded-lg p-2 border border-gray-500">
+                <option disabled value="">Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div className="w-full">
+              <h3 className="mb-2 font-bold">Date Of Birth</h3>
+              <Input type="date" />
+            </div>
+          </div>
+
+          <div className="w-full mt-4 rounded-lg text-white text-lg font-semibold">
+            <ButtonItem
+              typeButton="submit"
+              classNameValue="w-full rounded-md w-20 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              nameButton="Save"
+              action={() =>
+                handleUpdateUserInfo({
+                  email: userInfo.email,
+                  username,
+                  bio,
+                  avatar: newAvatar ? newAvatar : avatar,
+                })
+              }
             />
-            <input
-              id="file-upload"
-              name="file-upload"
-              type="file"
-              ref={fileInputRef}
-              onChange={handleChangeAvatar}
-              accept="image/*"
-              multiple={false}
-              className="hidden"
-            />
-            <button onClick={handleClick}>
-              <CameraIcon className="h-8 w-8 hover:opacity-100 opacity-80 text-amber-500" />
-            </button>
           </div>
         </div>
-      </div>
-
-      <div className="mt-6 flex items-center justify-end gap-x-6">
-        <ButtonItem
-          typeButton="submit"
-          classNameValue="rounded-md w-20 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          nameButton="Save"
-          action={() =>
-            handleUpdateUserInfo({
-              email: userInfo.email,
-              username,
-              bio,
-              avatar: newAvatar ? newAvatar : avatar,
-            })
-          }
-        />
       </div>
     </div>
   );

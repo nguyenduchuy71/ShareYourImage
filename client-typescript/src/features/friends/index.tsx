@@ -48,8 +48,8 @@ function FriendScreen({ socket }) {
   };
 
   return (
-    <div className="w-full p-6 relative">
-      <div className="divide-y divide-gray-200">
+    <div className="lg:w-[50%] md:w-[80%] xs:w-[100%] mx-auto my-6 p-2 relative">
+      <div className="min-h-screen p-6 pr-0 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-gray-200">
         <SearchItem
           type="search"
           placeholder="Search your friends"
@@ -92,7 +92,7 @@ function FriendScreen({ socket }) {
                   {!friendIds.includes(friend.id) ? (
                     <div className="ml-8">
                       {friend.friends.findIndex((item) => item.friendId === authInfo.userId) !==
-                      -1 ? (
+                        -1 ? (
                         <div>
                           {friend.friends
                             .filter((item) => item.friendId === authInfo.userId)
@@ -106,8 +106,8 @@ function FriendScreen({ socket }) {
                           ) : (
                             <ButtonItem
                               typeButton="button"
-                              classNameValue="rounded-md w-20 bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm"
-                              nameButton="Added"
+                              classNameValue="rounded-md w-20 bg-white px-3 py-2 text-sm border border-gray-300 font-semibold text-gray-500 shadow-sm"
+                              nameButton="Friend"
                               isDisabled={true}
                             />
                           )}

@@ -19,7 +19,7 @@ export const SearchItem = ({ type, placeholder, searchText, setSearchText }: ISe
         <Form.Control
           type={type}
           id="search"
-          className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:border-transparent"
+          className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg  focus:border-transparent"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           placeholder={placeholder}

@@ -105,7 +105,7 @@ def accept_Friend(friend: FriendBase, db: Session = Depends(get_db),
 def update_User_Info(userUpdate: UserUpdate, db: Session = Depends(get_db),
     current_user = Depends(getCurrentUser)):
     try:
-        userInfo = updateUserInfo(db, userUpdate, current_user) 
+        userInfo = updateUserInfo(db, userUpdate, current_user)
         return userInfo
     except Exception as error:
         logger.error(error)
