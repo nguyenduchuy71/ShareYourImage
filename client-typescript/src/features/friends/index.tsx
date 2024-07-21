@@ -48,15 +48,15 @@ function FriendScreen({ socket }) {
   };
 
   return (
-    <div className="lg:w-[50%] md:w-[80%] xs:w-[100%] mx-auto my-6 p-2 relative">
-      <div className="min-h-screen p-6 pr-0 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-gray-200">
+    <div className="mx-auto my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+      <div className="p-6 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-gray-200">
         <SearchItem
           type="search"
           placeholder="Search your friends"
           searchText={searchText}
           setSearchText={setSearchText}
         />
-        <ListGroup className="mx-4">
+        <ListGroup>
           {friends
             .filter(
               (friend) => friend.email.includes(searchText) || friend.username.includes(searchText),

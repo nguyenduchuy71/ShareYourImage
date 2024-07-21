@@ -14,12 +14,12 @@ function NotifyScreen() {
   }, [getNotifyEpic]);
 
   return (
-    <div className="lg:w-[50%] md:w-[80%] xs:w-[100%] mx-auto my-6 p-2">
-      <div className="min-h-screen p-6 pr-0 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent">
+    <div className="mx-auto my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+      <div className="p-6 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent">
         <div className="flex flex-col gap-4 text-lg">
           {notify.length > 0 ? (
-            notify.map((item) => (
-              <div className="flex justify-stretch items-center">
+            notify.map((item, index) => (
+              <div key={index} className="flex justify-stretch items-center">
                 <div className="mr-2">
                   <img
                     className="h-10 w-10 object-cover rounded-full bg-gray-50"

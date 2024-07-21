@@ -40,7 +40,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
     setIsLogin(!isLogin);
   };
   return (
-    <div className="flex flex-col justify-center py-20">
+    <div className="flex flex-col justify-center px-6 py-20">
       <div className="mx-auto w-full sm:max sm:max-w-sm">
         <div>
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

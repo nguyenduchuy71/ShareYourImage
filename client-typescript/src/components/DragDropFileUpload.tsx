@@ -1,9 +1,10 @@
-import React, { useCallback, useState, useMemo } from 'react';
-import { Box, Paper, Typography, IconButton, Grid, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
+import { useCallback, useState } from 'react';
+import { Box, Paper, Typography, IconButton, Grid, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ImagePreview from './ImagePreview';
+import { Loading } from './Loading';
 
-function DragDropFileUpload({ setFiles }) {
+function DragDropFileUpload({ uploadCollectionEpic }) {
   const [dragOver, setDragOver] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imagePreviews, setImagePreviews] = useState([]);
@@ -54,8 +55,8 @@ function DragDropFileUpload({ setFiles }) {
     }
   }, []);
 
-  const handleConfirmUpload = () => {
-    setFiles(filesToUpload)
+  const handleUploadFiles = () => {
+    uploadCollectionEpic(filesToUpload);
     setImagePreviews([]);
     setFilesToUpload([]);
     setOpen(false);
@@ -74,31 +75,6 @@ function DragDropFileUpload({ setFiles }) {
       handleClose();
     }
   };
-
-  const previews = useMemo(() => (
-    imagePreviews.map((src, index) => (
-      <Grid item xs={12} sm={6} md={3} key={index}>
-        <div className="relative flex justify-center rounded-lg border-2 border-gray-400 p-2">
-          <Box
-            component="img"
-            src={src}
-            alt={`Image Preview ${index + 1}`}
-            sx={{ width: '100px', height: '100px', objectFit: 'cover' }}
-          />
-          <IconButton
-            onClick={() => handleRemoveImage(index)}
-            sx={{
-              position: 'absolute',
-              top: '-8px',
-              right: '-8px',
-            }}
-          >
-            <DeleteIcon className='hover:opacity-70' />
-          </IconButton>
-        </div>
-      </Grid>
-    ))
-  ), [imagePreviews]);
 
   return (
     <Box>
@@ -133,32 +109,22 @@ function DragDropFileUpload({ setFiles }) {
           </Box>
         </label>
         {loading && (
-          <CircularProgress
-            size={30}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              marginTop: '-12px',
-              marginLeft: '-12px',
-            }}
-          />
+          <Loading />
         )}
       </Paper>
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>Confirm Upload</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
-            {previews}
+            <ImagePreview imagePreviews={imagePreviews} handleRemoveImage={handleRemoveImage} />
           </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">Cancel</Button>
-          <Button onClick={handleConfirmUpload} color="primary">OK</Button>
+          <Button onClick={handleUploadFiles} color="primary">Upload</Button>
         </DialogActions>
       </Dialog>
     </Box>
-
   );
 }
 

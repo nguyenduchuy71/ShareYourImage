@@ -32,15 +32,14 @@ def getCollections(db: Session = Depends(get_db), current_user = Depends(AuthUti
 @router.post("/")
 def postCollections(files: list[UploadFile] = File(...), db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
     try:
+        listFileUpload = []
         for file in files:
             item = {'title': file.filename}
             itemInfo = ItemController.create_user_item(db=db, item=item, user_id=current_user.id)
-            if itemInfo:
-                destination_blob_name = f"{current_user.id}/{file.filename}"
-                storageController.upload_file(file, destination_blob_name)
-                return destination_blob_name
-            else:
-                return status.HTTP_404_NOT_FOUND
+            destination_blob_name = f"{current_user.id}/{file.filename}"
+            storageController.upload_file(file, destination_blob_name)
+            listFileUpload.append(destination_blob_name)
+        return listFileUpload
     except Exception as error:
         logger.error(error)
         return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")

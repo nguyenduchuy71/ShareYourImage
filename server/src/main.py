@@ -54,17 +54,6 @@ app.include_router(authRouter)
 app.include_router(notifyRouter)
 app.include_router(itemRouter)
 
-# @app.on_event("startup")
-# def startup_event():
-#     logger.info("Starting up the application")
-#     database.Base.metadata.create_all(bind=database.engine)
-#     bg_tasks = BackgroundTasks()
-#     bg_tasks.add_task(kafka_consumer)
-
-# @app.on_event("shutdown")
-# def shutdown_event():
-#     logger.info("Shutting down the application")
-
 @app.on_event("startup")
 async def start_consumer():
     def consume_messages():
@@ -93,6 +82,7 @@ async def start_consumer():
 def shutdown_event():
     logger.info("Shutting down the application")
     consumer.close()
+    sys.exit(1)
 
 def signal_handler(sig, frame):
     logger.info("Received termination signal, shutting down gracefully...")

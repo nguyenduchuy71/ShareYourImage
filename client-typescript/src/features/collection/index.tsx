@@ -39,7 +39,6 @@ function CollectionScreen({ socket }) {
     state.authInfo,
     state.getAuthenUserInfo,
   ]);
-  const [files, setFiles] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(null);
 
@@ -55,11 +54,6 @@ function CollectionScreen({ socket }) {
     getFriendsEpic();
   }, [getFriendsEpic, isLoading]);
 
-  const handleUploadFiles = (e) => {
-    e.preventDefault();
-    uploadCollectionEpic(files);
-    setFiles([]);
-  };
 
   const handleSelectedItem = (collection) => {
     setSelectedItem(collection);
@@ -80,18 +74,8 @@ function CollectionScreen({ socket }) {
   return (
     <div className="w-full h-full overflow-hidden mx-auto max-w-2xl p-6 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
       <div>
-        <p className="text-pretty text-lg font-semibold">Upload new images</p>
-        <form onSubmit={handleUploadFiles} className="flex flex-col">
-          <DragDropFileUpload setFiles={setFiles} />
-          <div className="flex justify-end">
-            <ButtonItem
-              typeButton="submit"
-              classNameValue="rounded-md w-30 bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-              nameButton="Upload"
-              isHidden={files.length === 0 ? true : false}
-            />
-          </div>
-        </form>
+        <p className="mb-2 text-pretty text-lg font-semibold">Upload new images</p>
+        <DragDropFileUpload uploadCollectionEpic={uploadCollectionEpic} />
       </div>
 
       <div className="mt-8">

@@ -56,26 +56,29 @@ export const useCollectionStore = create<ICollectionStore>((set, get) => ({
         headers,
       });
       if (res.status === 200) {
-        const imagePath: string = res.data;
-        const listImage = await storage.ref().child(imagePath.split('/')[0]);
-        listImage
-          .list()
-          .then((result) => {
-            result.items.forEach(async (imageRef) => {
-              const srcImage = await imageRef.getDownloadURL();
-              imageRef.getMetadata().then((metadata) => {
-                if (metadata.fullPath === imagePath) {
-                  const newCollections = [...get().collections, { ...metadata, srcImage }];
-                  set({ collections: handleSortListObjectCollection(newCollections) });
-                  return;
-                }
+        const imagePaths: string[] = res.data;
+        if (imagePaths.length > 0) {
+          const listImage = await storage.ref().child(imagePaths[0].split('/')[0]);
+          listImage
+            .list()
+            .then((result) => {
+              let newCollections: any[] = []
+              result.items.forEach(async (imageRef) => {
+                const srcImage = await imageRef.getDownloadURL();
+                imageRef.getMetadata().then((metadata) => {
+                  if (imagePaths.includes(metadata.fullPath)) {
+                    newCollections = [...get().collections, { ...metadata, srcImage }];
+                    set({ collections: handleSortListObjectCollection(newCollections) });
+                  }
+                });
               });
+              triggerNotify('Upload collections successfull');
+            })
+            .catch((error) => {
+              set({ error });
             });
-          })
-          .catch((error) => {
-            set({ error });
-          });
-        triggerNotify('Upload collections successfull');
+        }
+
       }
     } catch (error) {
       handleErrorStatus(error);
