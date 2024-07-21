@@ -1,30 +1,65 @@
-# React + TypeScript + Vite
+# Client-Side Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This client is a web application that enables users to share images in real-time. The client-side of the application is built using modern web technologies to ensure a responsive and dynamic user experience.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get started with the project, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
+    ```sh
+    https://github.com/nguyenduchuy71/ShareYourImage
+    ```
+2. Navigate into the project directory:
+    ```sh
+    cd client-typescript
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Usage
+
+To start the development server, run:
+```sh
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Features
+
+- **User Authentication**: Secure user authentication ensures that only registered users can upload and view images.
+- **Real-Time Image Sharing**: Users can upload images and share them with others in real-time using WebSocket technology.
+- **Responsive Design**: The application is styled with TailwindCSS to ensure it looks great on all devices, from mobile phones to desktops.
+- **State Management**: Zustand is used for efficient state management, ensuring smooth interaction and real-time updates across the application.
+- **Firebase Storage**: Uploaded images are securely stored in Firebase Storage, leveraging its robust and scalable infrastructure.
+
+
+## Technologies Used
+
+### ReactJS
+
+[ReactJS](https://reactjs.org/) is a popular JavaScript library for building user interfaces. It allows developers to create large web applications that can update and render efficiently in response to data changes. React's component-based architecture makes it easy to build reusable UI components.
+
+### TypeScript
+
+[TypeScript](https://www.typescriptlang.org/) is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale. By adding static types, TypeScript improves developer productivity and code maintainability. It helps catch errors early through type checking and provides powerful IDE features like auto-completion and refactoring.
+
+### TailwindCSS
+
+[TailwindCSS](https://tailwindcss.com/) is a utility-first CSS framework that provides low-level utility classes to build custom designs directly in your markup. It enables rapid UI development and eliminates the need for custom CSS. With its responsive design utilities and extensive configurability, TailwindCSS helps streamline the styling process.
+
+### Zustand
+
+[Zustand](https://github.com/pmndrs/zustand) is a small, fast, and scalable state management library for React applications. It provides a simple API to manage and update state without the boilerplate typically associated with state management libraries. Zustand’s minimalistic approach and optimized performance make it an excellent choice for managing state in React applications.
+
+### Firebase Storage
+
+[Firebase Storage](https://firebase.google.com/products/storage) provides secure file uploads and downloads for Firebase apps. It is backed by Google Cloud Storage and offers robust and scalable object storage solutions. Firebase Storage is easy to integrate with other Firebase services and provides a simple and efficient way to handle user-generated content, such as photos and videos.
