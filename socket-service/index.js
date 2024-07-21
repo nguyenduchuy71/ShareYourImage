@@ -20,6 +20,10 @@ socketIO.on("connection", (socket) => {
     socketIO.emit(`notify/${data.friendId}`, data.message);
   });
 
+  socket.on("shareImage", (data) => {
+    socketIO.emit(`notify/${data.friendId}`, data.message);
+  });
+
   socket.on("disconnect", () => {
     socket.disconnect();
   });

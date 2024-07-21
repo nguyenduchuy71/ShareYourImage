@@ -41,7 +41,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="lg:w-[100%] md:w-[90%] xs:w-[96%] mx-auto py-6 dark:bg-gray-900">
+    <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto py-6 dark:bg-gray-900">
       <div
         className="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
         <h1
@@ -52,7 +52,7 @@ export default function ProfileScreen() {
           <div
             className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
 
-            <div className="flex justify-center relative">
+            <div className="flex justify-center relative py-2">
               <img
                 src={avatar ? avatar : 'https://github.com/shadcn.png'}
                 className="w-44 h-44 rounded-full object-center inline-block"
@@ -76,9 +76,9 @@ export default function ProfileScreen() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap ">
             <div className="w-full">
-              <h3 className="mb-2 font-bold">First name</h3>
+              <h3 className="my-2 font-bold">First name</h3>
               <Input
                 type="text"
                 name="firstname"
@@ -88,7 +88,7 @@ export default function ProfileScreen() {
             </div>
 
             <div className="w-full">
-              <h3 className="mb-2 font-bold">Last name</h3>
+              <h3 className="my-2 font-bold">Last name</h3>
               <Input
                 type="text"
                 name="lastname"
@@ -98,9 +98,9 @@ export default function ProfileScreen() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap ">
             <div className="w-full">
-              <h3 className="mb-2 font-bold">Username</h3>
+              <h3 className="my-2 font-bold">Username</h3>
               <Input
                 type="text"
                 name="username"
@@ -112,7 +112,7 @@ export default function ProfileScreen() {
             </div>
 
             <div className="w-full">
-              <h3 className="mb-2 font-bold">Bio</h3>
+              <h3 className="my-2 font-bold">Bio</h3>
               <Input
                 type="text"
                 name="bio"
@@ -124,9 +124,9 @@ export default function ProfileScreen() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap my-4 w-full">
+          <div className="flex flex-row gap-x-10 lg:flex-nowrap md:flex-wrap sm:flex-wrap xs:flex-wrap ">
             <div className="w-full">
-              <h3 className="mb-2 font-bold">Sex</h3>
+              <h3 className="my-2 font-bold">Sex</h3>
               <select
                 className="w-full rounded-lg p-2 border border-gray-500">
                 <option disabled value="">Select Sex</option>
@@ -135,7 +135,7 @@ export default function ProfileScreen() {
               </select>
             </div>
             <div className="w-full">
-              <h3 className="mb-2 font-bold">Date Of Birth</h3>
+              <h3 className="my-2 font-bold">Date Of Birth</h3>
               <Input type="date" />
             </div>
           </div>

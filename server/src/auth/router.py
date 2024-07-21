@@ -4,8 +4,8 @@ from db.database import get_db
 from auth.schema import Token
 from users.schema import user
 from users.models import User
-from users.controller import createUser
-from auth.utills import verify, createAccessToken
+from users.controller import UserController
+from auth.utills import AuthUtil
 from log.logger import logger
 
 router = APIRouter(tags=['Authentication'])
@@ -18,10 +18,10 @@ def login(user_credentials:user.UserLogin, db:Session = Depends(get_db)):
         if not userInfo:
             return HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST, detail="Email or password incorrect")
-        if not verify(user_credentials.password, userInfo.hashedPassword):
+        if not AuthUtil.verify(user_credentials.password, userInfo.hashedPassword):
             return HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Credentials")
-        access_token = createAccessToken(data={"user_id": userInfo.id})
+        access_token = AuthUtil.createAccessToken(data={"user_id": userInfo.id})
         return Token(token=access_token, userId=userInfo.id, token_type="Bearer")
     except Exception as error:
         logger.error(error)
@@ -34,8 +34,8 @@ def signup(user_credentials:user.UserCreate, db:Session = Depends(get_db)):
         if userInfo:
             return HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
-        userInfo = createUser(db, user=user_credentials)
-        access_token = createAccessToken(data={"user_id": userInfo.id})
+        userInfo = UserController.createUser(db, user=user_credentials)
+        access_token = AuthUtil.createAccessToken(data={"user_id": userInfo.id})
         return Token(token=access_token, userId=userInfo.id, token_type="Bearer")
     except Exception as error:
         logger.error(error)

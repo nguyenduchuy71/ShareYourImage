@@ -124,8 +124,8 @@ function FriendScreen({ socket }) {
                   ) : (
                     <ButtonItem
                       typeButton="button"
-                      classNameValue="rounded-md w-20 bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm"
-                      nameButton="Added"
+                      classNameValue="rounded-md w-20 bg-white px-3 py-2 text-sm border border-gray-300 font-semibold text-gray-500 shadow-sm"
+                      nameButton="Friend"
                       isDisabled={true}
                     />
                   )}

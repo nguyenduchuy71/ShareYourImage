@@ -70,33 +70,32 @@ function DragDropFileUpload({ setFiles }) {
     const newFiles = filesToUpload.filter((_, i) => i !== index);
     setImagePreviews(newPreviews);
     setFilesToUpload(newFiles);
-    if(newFiles.length === 0) {
+    if (newFiles.length === 0) {
       handleClose();
     }
   };
 
   const previews = useMemo(() => (
     imagePreviews.map((src, index) => (
-      <Grid item xs={12} sm={6} md={4} key={index}>
-        <Box position="relative">
+      <Grid item xs={12} sm={6} md={3} key={index}>
+        <div className="relative flex justify-center rounded-lg border-2 border-gray-400 p-2">
           <Box
             component="img"
             src={src}
             alt={`Image Preview ${index + 1}`}
-            sx={{ width: '100px', height: '100px' }}
+            sx={{ width: '100px', height: '100px', objectFit: 'cover' }}
           />
           <IconButton
             onClick={() => handleRemoveImage(index)}
             sx={{
               position: 'absolute',
-              top: 8,
-              right: 8,
-              background: 'rgba(255, 255, 255, 0.7)',
+              top: '-8px',
+              right: '-8px',
             }}
           >
-            <DeleteIcon />
+            <DeleteIcon className='hover:opacity-70' />
           </IconButton>
-        </Box>
+        </div>
       </Grid>
     ))
   ), [imagePreviews]);
@@ -135,7 +134,7 @@ function DragDropFileUpload({ setFiles }) {
         </label>
         {loading && (
           <CircularProgress
-            size={24}
+            size={30}
             style={{
               position: 'absolute',
               top: '50%',

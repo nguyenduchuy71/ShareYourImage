@@ -49,7 +49,7 @@ function App() {
             {authToken && <Sidebar />}
             <Routes>
               <Route path="/" index element={<MainScreen />} />
-              <Route path="/collection" element={<CollectionScreen />} />
+              <Route path="/collection" element={<CollectionScreen socket={socket} />} />
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/friends" element={<FriendScreen socket={socket} />} />
               <Route path="/notifications" element={<NotifyScreen />} />

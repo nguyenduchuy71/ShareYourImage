@@ -6,12 +6,12 @@ interface IImgaeItem {
 
 export const ImageItem = ({ imageSrc, imageAlt, isSelected }: IImgaeItem) => {
   return (
-    <div>
+    <div className="p-2">
       <img
         src={imageSrc}
         alt={imageAlt}
         loading="lazy"
-        className={`h-60 w-60 object-cover rounded-lg ${isSelected ? 'p-0' : 'p-2'}`}
+        className={`w-56 h-56 rounded-lg object-cover ${isSelected ? 'p-0' : 'p-2'}`}
       />
     </div>
   );

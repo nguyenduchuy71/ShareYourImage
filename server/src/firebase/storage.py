@@ -7,18 +7,25 @@ cred_path = os.path.join(os.path.dirname(__file__), 'serviceAccountKey.json')
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
 
-# Upload a file to Firebase Storage
-def upload_file(bucket, file: UploadFile, destination_blob_name: str):
-    try:
-        blob = bucket.blob(destination_blob_name)
-        blob.upload_from_file(file.file)
-    except Exception as error:
-        raise error
+class StorageControler:
+    bucket = None
+    config = None
 
-# Delete a file to Firebase Storage
-def remove_file(bucket, blob_path: str):
-    try:
-        blob = bucket.blob(blob_path)
-        blob.delete()
-    except Exception as error:
-        raise error
+    def __init__(self, bucket):
+        self.bucket = bucket
+
+    # Upload a file to Firebase Storage
+    def upload_file(self, file: UploadFile, destination_blob_name: str):
+        try:
+            blob = self.bucket.blob(destination_blob_name)
+            blob.upload_from_file(file.file)
+        except Exception as error:
+            raise error
+
+    # Delete a file to Firebase Storage
+    def remove_file(self, blob_path: str):
+        try:
+            blob = self.bucket.blob(blob_path)
+            blob.delete()
+        except Exception as error:
+            raise error

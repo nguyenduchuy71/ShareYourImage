@@ -47,7 +47,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
             {isLogin ? "Sign in to your account" : "Create a new account"}
           </h2>
         </div>
-        <div className="flex items-center justify-center mt-4 rounded-lg shadow-md hover:bg-gray-300 hover:opacity-80 cursor-pointer">
+        <div className="flex items-center justify-center mt-4 rounded-lg shadow-md hover:bg-gray-200 hover:opacity-80 cursor-pointer">
           <div className="px-4 py-3">
             <svg className="h-6 w-6" viewBox="0 0 40 40">
               <path
@@ -110,7 +110,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
               <Button variant="default">{isLogin ? "Login" : "Create account"}</Button>
             </div>
           </form>
-          <div className="mt-8 text-center text-sm text-gray-500">
+          <div className="mt-4 text-center text-sm text-gray-500">
             {isLogin ? "Don't have an account?" : "Have an account?"}
             <span
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500 cursor-pointer"
