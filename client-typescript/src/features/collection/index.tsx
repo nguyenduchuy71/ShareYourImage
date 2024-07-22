@@ -1,6 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect } from 'react';
-import { ButtonItem } from '@/components/ButtonItem';
+import { useState, useEffect, useCallback } from 'react';
 import { ImageItem } from '@/components/ImageItem';
 import { useCollectionStore } from './epic';
 import { ICollectionStore } from './epic/interface';
@@ -12,8 +11,14 @@ import { IAuthenStore } from '../login/epic/interface';
 import DragDropFileUpload from '@/components/DragDropFileUpload';
 import EmptyData from '@/components/EmptyData';
 import Modal from '@/components/Modal';
+import ImageViewer from 'react-simple-image-viewer';
+import ShareIcon from '@mui/icons-material/Share';
+import PreviewIcon from '@mui/icons-material/Preview';
 
 function CollectionScreen({ socket }) {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+
   const [friends, isLoading, getFriendsEpic] = useShareStore((state: IShareStore) => [
     state.friends,
     state.isLoading,
@@ -54,10 +59,20 @@ function CollectionScreen({ socket }) {
     getFriendsEpic();
   }, [getFriendsEpic, isLoading]);
 
-
-  const handleSelectedItem = (collection) => {
+  const handleModalShareImage = (collection) => {
     setSelectedItem(collection);
+    setShowModal(true)
+  }
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
   };
+
+  const handlePreviewImage = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
 
   const handleDeleteCollection = (imagePath, srcImage) => {
     deteleCollectionEpic(imagePath, srcImage);
@@ -81,13 +96,6 @@ function CollectionScreen({ socket }) {
       <div className="mt-8">
         <div className="my-8 flex justify-between items-center">
           <p className="text-pretty text-lg font-semibold">Your images</p>
-          <ButtonItem
-            typeButton="button"
-            classNameValue="rounded-md w-30 bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-            nameButton="Share"
-            action={() => setShowModal(true)}
-            isHidden={selectedItem ? false : true}
-          />
           <Modal
             friends={friends}
             showModal={showModal}
@@ -99,28 +107,40 @@ function CollectionScreen({ socket }) {
         {!isCollectionLoading ? (
           <div>
             {collections.length > 0 ? (
-              <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                {collections.map((collection) => {
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                {collections.map((collection, index) => {
                   return (
-                    <div key={collection.fullPath} className="relative rounded-lg border-2 border-gray-500">
-                      <XCircleIcon
-                        onClick={() => handleDeleteCollection(collection.fullPath, collection.srcImage)}
-                        className="w-6 h-6 cursor-pointer absolute right-0 top-0 hover:opacity-70"
-                      />
-                      <div onClick={() => handleSelectedItem(collection)}>
+                    <div key={index} className="relative rounded-lg border-2 border-gray-500">
+                      <div className="flex justify-center">
                         <ImageItem
                           imageSrc={collection.srcImage}
                           imageAlt={collection.name}
-                          isSelected={
-                            selectedItem && collection.fullPath === selectedItem.fullPath
-                              ? true
-                              : false
-                          }
                         />
+                      </div>
+                      <div className="w-7 h-7 cursor-pointer absolute -right-2 -top-2 hover:opacity-80"
+                      >
+                        <XCircleIcon
+                          onClick={() => handleDeleteCollection(collection.fullPath, collection.srcImage)}
+                        />
+                      </div>
+                      <div className="absolute left-0.5 bottom-10 p-1 bg-blue-600 text-white rounded-md font-semibold text-whiteshadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500" onClick={() => handlePreviewImage(index)}>
+                        <PreviewIcon className="cursor-pointer" />
+                      </div>
+                      <div className="absolute left-0.5 bottom-0.5 p-1 bg-blue-600 text-white rounded-md font-semibold text-whiteshadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500" onClick={() => handleModalShareImage(collection)}>
+                        <ShareIcon className="cursor-pointer" />
                       </div>
                     </div>
                   );
                 })}
+                {isViewerOpen && (
+                  <ImageViewer
+                    src={collections.map(collection => collection.srcImage)}
+                    currentIndex={currentImage}
+                    disableScroll={false}
+                    closeOnClickOutside={true}
+                    onClose={closeImageViewer}
+                  />
+                )}
               </div>
             ) : (
               <EmptyData message={'Empty collection'} />

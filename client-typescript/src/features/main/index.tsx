@@ -32,7 +32,7 @@ function MainScreen() {
   }, [getShareItemEpic, selectedFriend]);
 
   return (
-    <div className="mx-auto p-6 lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+    <div className="mx-auto p-6 lg:w-[72%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
       {!isLoading ? (
         <div>
           {friends.length > 0 && (
@@ -47,7 +47,6 @@ function MainScreen() {
                       <ImageItem
                         imageSrc={image.pathImageShare}
                         imageAlt={image.pathImageShare}
-                        isSelected={true}
                       />
                     </div>
                   );
