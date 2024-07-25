@@ -40,7 +40,7 @@ function App() {
   }, [socket]);
 
   return (
-    <div className="min-w-full min-h-screen duration-300 ">
+    <div className="min-w-full min-h-screen duration-300 bg-[#1D1D1D]">
       {!authToken ? (
         <SignInScreen />
       ) : (
@@ -61,11 +61,11 @@ function App() {
                 </Routes>
               </div>
               <Footer />
-              <ToastContainer />
             </React.Fragment>
           }
         </React.Fragment>
       )}
+      <ToastContainer />
     </div>
   );
 }

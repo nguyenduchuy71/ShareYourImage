@@ -14,8 +14,8 @@ function NotifyScreen() {
   }, [getNotifyEpic]);
 
   return (
-    <div className="mx-auto my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
-      <div className="p-6 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent">
+    <div className="mt-10 mx-auto lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+      <div className="bg-[#1D1D1D] rounded-xl p-6 border-2 lg:border-[#ABF600] md:border-transparent sm:border-transparent xs:border-transparent">
         <div className="flex flex-col gap-4 text-lg">
           {notify.length > 0 ? (
             notify.map((item, index) => (
@@ -33,7 +33,7 @@ function NotifyScreen() {
                 >
                   <p className="overflow-auto">{item.content}</p>
                   <div className="font-thin text-sm">
-                    <span className="text-black">{formatDateTime(item.createdAt)}</span>
+                    <span className="text-white font-semibold">{formatDateTime(item.createdAt)}</span>
                   </div>
                 </div>
               </div>

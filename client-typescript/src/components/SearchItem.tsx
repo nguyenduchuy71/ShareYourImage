@@ -14,7 +14,7 @@ export const SearchItem = ({ type, placeholder, searchText, setSearchText }: ISe
     <InputGroup className="max-w-md mb-4 mx-auto">
       <Form.Group className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <MagnifyingGlassIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+          <MagnifyingGlassIcon className="w-4 h-4 text-gray-500" />
         </div>
         <Form.Control
           type={type}

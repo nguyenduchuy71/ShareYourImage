@@ -38,12 +38,12 @@ function MainScreen() {
           {friends.length > 0 && (
             <DropBoxFriend friends={friends} setSelectedFriend={setSelectedFriend} />
           )}
-          <div className="my-4">
+          <div className="my-6">
             {shareImages.length > 0 ? (
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 {shareImages.map((image) => {
                   return (
-                    <div key={image.id}>
+                    <div key={image.id} className="flex justify-center items-center rounded-md border-2 border-[#ABF600]">
                       <ImageItem
                         imageSrc={image.pathImageShare}
                         imageAlt={image.pathImageShare}

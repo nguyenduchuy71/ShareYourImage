@@ -84,11 +84,11 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         style={{
-          border: dragOver ? '2px dashed #000' : '2px dashed #aaa',
+          border: dragOver ? '2px dashed #212121' : '2px dashed #ABF600',
           padding: 20,
           textAlign: 'center',
           cursor: 'pointer',
-          background: dragOver ? '#eee' : '#fafafa',
+          background: dragOver ? '#ABF600' : '#212121',
           position: 'relative',
         }}
       >
@@ -102,10 +102,10 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
         />
         <label htmlFor="raised-button-file">
           <Box display="flex" flexDirection="column" alignItems="center">
-            <IconButton className="hover:opacity-80" color="primary" aria-label="upload picture" component="span">
+            <IconButton className="hover:opacity-80" color="error" aria-label="upload picture" component="span">
               <CloudUploadIcon style={{ fontSize: 60 }} />
             </IconButton>
-            <Typography>Drag and drop files here or click to select files</Typography>
+            <Typography className='font-bold text-white'>Drag and drop files here or click to select files</Typography>
           </Box>
         </label>
         {loading && (
@@ -113,7 +113,7 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
         )}
       </Paper>
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>Confirm Upload</DialogTitle>
+        <DialogTitle className='text-[#212121] font-bold'>Confirm Upload</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
             <ImagePreview imagePreviews={imagePreviews} handleRemoveImage={handleRemoveImage} />

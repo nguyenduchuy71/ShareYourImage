@@ -44,7 +44,7 @@ export default function ProfileScreen() {
 
   return (
     <div
-      className="shadow-2xl mx-auto my-6 p-6 rounded-xl border border-gray-300 lg:w-[70%] md:w-[90%] sm:w-[100%] xs:w-[100%]">
+      className="shadow-2xl mx-auto my-6 p-6 rounded-xl border-2 border-[#ABF600] lg:w-[70%] md:w-[90%] sm:w-[100%] xs:w-[100%]">
 
       <div
         className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
@@ -68,7 +68,7 @@ export default function ProfileScreen() {
                 multiple={false}
                 className="hidden"
               />
-              <CameraIcon className="h-8 w-8 hover:opacity-100 opacity-80 text-amber-500" />
+              <CameraIcon className="h-8 w-8 hover:opacity-100 opacity-80 text-[#ABF600]" />
             </button>
           </div>
         </div>
@@ -142,10 +142,10 @@ export default function ProfileScreen() {
         </div>
       </div>
 
-      <div className="mt-6 w-full rounded-lg text-white text-lg font-semibold">
+      <div className="mt-6 w-full rounded-lg">
         <ButtonItem
           typeButton="submit"
-          classNameValue="w-full rounded-md w-20 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          classNameValue="w-full bg-[#ABF600] rounded-md w-20 p-2 text-lg font-bold text-[#212121] hover:opacity-85"
           nameButton="Save"
           action={() =>
             handleUpdateUserInfo({

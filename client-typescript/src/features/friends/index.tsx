@@ -49,7 +49,7 @@ function FriendScreen({ socket }) {
 
   return (
     <div className="mx-auto my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
-      <div className="p-6 rounded-3xl border lg:border-gray-300 md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-gray-200">
+      <div className="p-6 rounded-2xl border lg:border-[#ABF600] md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-[#ABF600]">
         <SearchItem
           type="search"
           placeholder="Search your friends"
@@ -70,20 +70,20 @@ function FriendScreen({ socket }) {
                     alt="Friend's avatar"
                   />
                   <div className="min-w-0 flex-auto">
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">{friend.email}</p>
+                    <p className="mt-1 truncate text-sm font-semibold leading-5 text-#[ABF600]">{friend.email}</p>
                     {friend.isActive ? (
                       <div className="mt-1 flex items-center gap-x-1.5">
                         <div className="flex-none rounded-full  bg-slate-800/20 p-1">
-                          <div className="h-1.5 w-1.5 rounded-full bg-slate-800" />
+                          <div className="h-2 w-2 rounded-full bg-[#ee1d4f]" />
                         </div>
-                        <p className="text-xs leading-5 text-gray-500">Offlline</p>
+                        <p className="text-xs font-semibold leading-5 text-white">Offlline</p>
                       </div>
                     ) : (
                       <div className="mt-1 flex items-center gap-x-1.5">
                         <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                          <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                          <div className="h-2 w-2 rounded-full bg-emerald-500" />
                         </div>
-                        <p className="text-xs leading-5 text-gray-500">Online</p>
+                        <p className="text-xs font-semibold leading-5 text-white">Online</p>
                       </div>
                     )}
                   </div>
@@ -99,14 +99,14 @@ function FriendScreen({ socket }) {
                             .findIndex((item) => item.isAccepted) === -1 ? (
                             <ButtonItem
                               typeButton="button"
-                              classNameValue="rounded-md w-20 bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-80"
+                              classNameValue="rounded-md w-20 bg-[#ABF600] px-3 py-2 text-sm font-semibold text-black shadow-sm hover:opacity-80"
                               nameButton="Accept"
                               action={() => handleAcceptFriend(friend.id)}
                             />
                           ) : (
                             <ButtonItem
                               typeButton="button"
-                              classNameValue="rounded-md w-20 bg-white px-3 py-2 text-sm border border-gray-300 font-semibold text-gray-500 shadow-sm"
+                              classNameValue="rounded-md w-20 bg-[#1D1D1D] px-3 py-2 text-sm border border-[#ABF600] font-semibold text-white font-semibold shadow-sm"
                               nameButton="Friend"
                               isDisabled={true}
                             />
@@ -115,7 +115,7 @@ function FriendScreen({ socket }) {
                       ) : (
                         <ButtonItem
                           typeButton="button"
-                          classNameValue="rounded-md w-20 bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-80"
+                          classNameValue="rounded-md w-20 bg-[#ABF600] px-3 py-2 text-sm font-semibold text-black shadow-sm hover:opacity-80"
                           nameButton="Add"
                           action={() => handleAddFriend(friend.id)}
                         />
@@ -124,7 +124,7 @@ function FriendScreen({ socket }) {
                   ) : (
                     <ButtonItem
                       typeButton="button"
-                      classNameValue="rounded-md w-20 bg-white px-3 py-2 text-sm border border-gray-300 font-semibold text-gray-500 shadow-sm"
+                      classNameValue="rounded-md w-20 bg-[#1D1D1D] px-3 py-2 text-sm border border-[#ABF600] font-semibold text-white font-semibold shadow-sm"
                       nameButton="Friend"
                       isDisabled={true}
                     />

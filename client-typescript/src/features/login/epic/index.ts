@@ -38,7 +38,7 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
         sessionStorage.setItem('auth', res.data.token);
         set({ authToken: res.data.token });
         set({ authInfo: userInfo });
-      } else if (res.data.status_code === 400) {
+      } else {
         message = res.data.detail;
       }
       triggerNotify(message);

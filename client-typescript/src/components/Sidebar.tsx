@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   UserCircleIcon,
   FolderIcon,
@@ -9,40 +10,48 @@ import {
 import { useAuthStore } from '../features/login/epic';
 import { CustomIconItem } from './CustomIconItem';
 
+const listMenu = [
+  {
+    name: 'Send images',
+    icon: ForwardIcon,
+    path: '/',
+    isSelected: false
+  },
+  {
+    name: 'Collection',
+    icon: FolderIcon,
+    path: '/collection',
+    isSelected: false
+  },
+  {
+    name: 'Profile',
+    icon: UserCircleIcon,
+    path: '/profile',
+    isSelected: false
+  },
+  {
+    name: 'Friends',
+    icon: UsersIcon,
+    path: '/friends',
+    isSelected: false
+  },
+  {
+    name: 'Notify',
+    icon: BellAlertIcon,
+    path: '/notifications',
+    isSelected: false
+  },
+];
+
 export function Sidebar() {
   const [logoutEpic] = useAuthStore((state: any) => [state.logoutEpic]);
-  const listMenu = [
-    {
-      name: 'Send images',
-      icon: ForwardIcon,
-      path: '/',
-    },
-    {
-      name: 'Collection',
-      icon: FolderIcon,
-      path: '/collection',
-    },
-    {
-      name: 'Profile',
-      icon: UserCircleIcon,
-      path: '/profile',
-    },
-    {
-      name: 'Friends',
-      icon: UsersIcon,
-      path: '/friends',
-    },
-    {
-      name: 'Notify',
-      icon: BellAlertIcon,
-      path: '/notifications',
-    },
-  ];
+  const [selectedMenu, setSelectedMenu] = useState(listMenu[0])
+
   return (
-    <div className="sticky top-0 min-h-screen bg-slate-800 text-white p-2 shadow-xl shadow-blue-gray-900/5 lg:w-[13rem] md:w-[13rem] sm:w-[8rem] xs:w-[8rem]">
-      <div className="flex flex-col">
+    <div className="sticky top-0 min-h-screen pr-4 bg-[#272727] text-[#ABF600] font-semibold lg:w-[13rem] md:w-[13rem] sm:w-[8rem] xs:w-[8rem]">
+      <div className="flex flex-col mt-4">
         {listMenu.map((menu) => (
-          <div key={menu.name} className="p-4 hover:bg-slate-600 rounded-md">
+          <div key={menu.name} onClick={() => setSelectedMenu(menu)} className={`my-2 hover:bg-[#1D1D1D] rounded-md ${selectedMenu.path === menu.path && 'shadow-xl shadow-black bg-[#404040] rounded-e-lg'}`}>
             <CustomIconItem
               key={menu.name}
               name={menu.name}
@@ -51,7 +60,7 @@ export function Sidebar() {
             />
           </div>
         ))}
-        <div className="p-4 hover:bg-slate-600 rounded-md" onClick={() => logoutEpic()}>
+        <div className="my-2 hover:bg-[#1D1D1D] rounded-md" onClick={() => logoutEpic()}>
           <CustomIconItem
             name="Log Out"
             CustomIconImage={ArrowLeftEndOnRectangleIcon}

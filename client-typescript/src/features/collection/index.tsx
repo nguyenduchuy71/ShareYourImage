@@ -110,23 +110,24 @@ function CollectionScreen({ socket }) {
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 {collections.map((collection, index) => {
                   return (
-                    <div key={index} className="relative rounded-lg border-2 border-gray-500">
+                    <div key={index} className="relative rounded-lg border-2 border-[#ABF600]">
                       <div className="flex justify-center">
                         <ImageItem
                           imageSrc={collection.srcImage}
                           imageAlt={collection.name}
                         />
                       </div>
-                      <div className="w-7 h-7 cursor-pointer absolute -right-2 -top-2 hover:opacity-80"
+                      <div className="absolute -right-2 -top-2 w-7 h-7 cursor-pointer"
                       >
                         <XCircleIcon
+                          className='text-[#ABF600] hover:opacity-80'
                           onClick={() => handleDeleteCollection(collection.fullPath, collection.srcImage)}
                         />
                       </div>
-                      <div className="absolute left-0.5 bottom-10 p-1 bg-blue-600 text-white rounded-md font-semibold text-whiteshadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500" onClick={() => handlePreviewImage(index)}>
+                      <div className="absolute left-1 bottom-11 p-1 bg-[#ABF600] text-[#212121] rounded-md font-semibold text-whiteshadow-sm hover:opacity-75" onClick={() => handlePreviewImage(index)}>
                         <PreviewIcon className="cursor-pointer" />
                       </div>
-                      <div className="absolute left-0.5 bottom-0.5 p-1 bg-blue-600 text-white rounded-md font-semibold text-whiteshadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500" onClick={() => handleModalShareImage(collection)}>
+                      <div className="absolute left-1 bottom-1 p-1 bg-[#ABF600] text-[#212121] rounded-md font-semibold text-whiteshadow-sm hover:opacity-75" onClick={() => handleModalShareImage(collection)}>
                         <ShareIcon className="cursor-pointer" />
                       </div>
                     </div>

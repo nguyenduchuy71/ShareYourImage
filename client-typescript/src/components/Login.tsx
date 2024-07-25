@@ -43,12 +43,12 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
     <div className="flex flex-col justify-center px-6 py-20">
       <div className="mx-auto w-full sm:max sm:max-w-sm">
         <div>
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight">
             {isLogin ? "Sign in to your account" : "Create a new account"}
           </h2>
         </div>
-        <div className="flex items-center justify-center mt-4 rounded-lg shadow-md hover:bg-gray-200 hover:opacity-80 cursor-pointer">
-          <div className="px-4 py-3">
+        <div className="flex items-center justify-center mt-4 p-1 cursor-pointer rounded-lg shadow-md bg-[#ABF600] hover:opacity-85 hover:shadow-xl hover:shadow-black">
+          <div className="p-4 bg-white rounded-full">
             <svg className="h-6 w-6" viewBox="0 0 40 40">
               <path
                 d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
@@ -64,14 +64,14 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
                 fill="#1976D2" />
             </svg>
           </div>
-          <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">Sign in with Google</h1>
+          <h2 className="px-4 w-5/6 text-center text-black font-bold">Sign in with Google</h2>
         </div>
         <div className="mt-6">
           <form className="space-y-4" onSubmit={handleLogin}>
             <div>
-              <label className="mb-1 block text-sm font-medium leading-6 text-gray-900">
+              <p className="mb-1 block text-sm font-medium leading-6">
                 Username
-              </label>
+              </p>
               <Input
                 type="email"
                 placeholder="Email"
@@ -81,9 +81,9 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium leading-6 text-gray-900">
+              <p className="mb-1 block text-sm font-medium leading-6">
                 Password
-              </label>
+              </p>
               <Input
                 type="password"
                 onChange={(e: any) => setPassword(e.target.value)}
@@ -94,9 +94,9 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
 
             {!isLogin && (
               <div>
-                <label className="mb-1 block text-sm font-medium leading-6 text-gray-900">
+                <p className="mb-1 block text-sm font-medium leading-6">
                   Confirm Password
-                </label>
+                </p>
                 <Input
                   type="password"
                   onChange={(e: any) => setRePassword(e.target.value)}
@@ -107,13 +107,13 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
             )}
 
             <div className="flex items-center justify-center">
-              <Button variant="default">{isLogin ? "Login" : "Create account"}</Button>
+              <Button className="bg-[#ABF600] text-black font-bold hover:text-white hover:border-2 border-[#ABF600]">{isLogin ? "Login" : "Create account"}</Button>
             </div>
           </form>
-          <div className="mt-4 text-center text-sm text-gray-500">
+          <div className="mt-4 text-center text-sm text-white">
             {isLogin ? "Don't have an account?" : "Have an account?"}
             <span
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500 cursor-pointer"
+              className="font-semibold leading-6 cursor-pointer"
               onClick={() => handleCheckLogin()}
             >
               {" "}

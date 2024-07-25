@@ -53,10 +53,10 @@ def deleteCollections(ownerId:str, imagePath:str, srcImage:str = '', db:Session 
             storageController.remove_file(blob_path)
             return status.HTTP_204_NO_CONTENT
         else:
-            return status.HTTP_404_NOT_FOUND
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="items not found")
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.post("/share/{friendId}")
 def shareCollection(friendId: str, item:CollectionShare, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -65,7 +65,7 @@ def shareCollection(friendId: str, item:CollectionShare, db: Session = Depends(g
         if itemShare:
             return status.HTTP_200_OK
         else:
-            return status.HTTP_404_NOT_FOUND
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="items not found")
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
