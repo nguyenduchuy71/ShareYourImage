@@ -1,3 +1,5 @@
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { ToastContainer } from 'react-toastify';
@@ -14,8 +16,6 @@ import NotFoundError from './features/errors/not-found-error';
 import SignInScreen from './features/login';
 import MainScreen from './features/main';
 import Footer from './components/footer';
-import './App.css';
-import 'react-toastify/dist/ReactToastify.css';
 import logo from './assets/img/logo.png'
 
 const url = `http://localhost:${import.meta.env.VITE_SOCKET_PORT}`;

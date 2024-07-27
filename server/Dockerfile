@@ -1,18 +1,23 @@
-# Use the official Python image as the base image
-FROM python:3.12
+# Stage 1: Install system dependencies
+FROM python:3.12-slim as base
 
-# Set the working directory in the container
+# Install PostgreSQL development packages
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
 WORKDIR /app
 
+# Install dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
 COPY . .
 
-# Install any dependencies needed
-RUN pip3 install --upgrade pip
-
-RUN pip3 install -r requirements.txt
-
-# Expose port 8000
-EXPOSE 8000
-
-# Command to run the FastAPI server
-CMD ["python3", "main.py"]
+# Expose port for FastAPI
+EXPOSE 8888
+CMD ["python", "src/main.py"]

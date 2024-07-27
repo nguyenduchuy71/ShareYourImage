@@ -9,26 +9,31 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
   authToken: null,
   error: null,
   loginEpic: async (credentials: any) => {
+    let message = 'Login successful';
     try {
       const res = await axios.post(`${BASEURL}/login`, credentials);
-      const userInfo = JSON.stringify({
-        email: credentials.email,
-        userId: res.data.userId,
-      });
-      sessionStorage.setItem('userInfo', userInfo);
-      sessionStorage.setItem('auth', res.data.token);
-      set({ authToken: res.data.token });
-      set({ authInfo: userInfo });
-      triggerNotify('Login successful');
+      if (res.status === 200) {
+        const userInfo = JSON.stringify({
+          email: credentials.email,
+          userId: res.data.userId,
+        });
+        sessionStorage.setItem('userInfo', userInfo);
+        sessionStorage.setItem('auth', res.data.token);
+        set({ authToken: res.data.token });
+        set({ authInfo: userInfo });
+      }
     } catch (error) {
+      message = 'Login failed';
       set({ error });
+    } finally {
+      triggerNotify(message);
     }
   },
   signUpEpic: async (credentials: any) => {
+    let message = 'Sign up successful';
     try {
-      let message = 'Sign up successful';
       const res = await axios.post(`${BASEURL}/signup`, credentials);
-      if (res.data.status_code === 200) {
+      if (res.status === 200) {
         const userInfo = JSON.stringify({
           email: credentials.email,
           userId: res.data.userId,
@@ -38,12 +43,13 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
         sessionStorage.setItem('auth', res.data.token);
         set({ authToken: res.data.token });
         set({ authInfo: userInfo });
-      } else {
-        message = res.data.detail;
       }
-      triggerNotify(message);
     } catch (error) {
+      message = 'Sign up fail';
       set({ error });
+    }
+    finally {
+      triggerNotify(message);
     }
   },
   logoutEpic: () => {

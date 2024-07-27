@@ -1,4 +1,5 @@
-from fastapi import Depends, APIRouter, HTTPException, status
+from fastapi import Depends, APIRouter, status
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from users.schema.user import User, UserCreate, UserUpdate
 from items.schema import Item, ItemCreate
@@ -6,8 +7,8 @@ from users.schema.friend import FriendBase
 from log.logger import logger
 from db.database import get_db
 from auth.utills import AuthUtil
-from broker.producer_service import send_require_add_friend
 from users.controller import UserController
+# from broker.producer_service import send_require_add_friend
 
 router = APIRouter(
     prefix="/users",
@@ -20,11 +21,17 @@ def createUser(user: UserCreate, db: Session = Depends(get_db)):
     try:
         db_user = UserController.getUserByEmail(db, email=user.email)
         if db_user:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+            return JSONResponse(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                content={"message": "Email already registered"}
+            )
         return UserController.createUser(db=db, user=user)
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.get("/", response_model=list[User])
 def getAllUsers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -33,7 +40,10 @@ def getAllUsers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), 
         return users
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.get("/{user_id}", response_model=User)
 def getUserById(user_id: int, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -41,7 +51,10 @@ def getUserById(user_id: int, db: Session = Depends(get_db), current_user = Depe
         return current_user
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.get("/friends/me", response_model=list[User])
 def getUserFriends(db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -50,7 +63,10 @@ def getUserFriends(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return friends
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.get("/profile/me", response_model=User)
 def getUserProfile(db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -58,7 +74,10 @@ def getUserProfile(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return current_user
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.post("/{user_id}/items/", response_model=Item)
 def createUserItem(
@@ -69,7 +88,10 @@ def createUserItem(
         return UserController.createUserItem(db=db, item=item, user_id=user_id)
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.post("/addfriend", response_model=list[User])
 def addFriend(friend: FriendBase, db: Session = Depends(get_db),
@@ -77,13 +99,19 @@ def addFriend(friend: FriendBase, db: Session = Depends(get_db),
     try:
         friendInfo = UserController.addFriend(db, owner=current_user, friend_id=friend.friendId)
         if friendInfo is None:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Friend not found")
+            return JSONResponse(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                content={"message": "Friend not found"}
+            )
         users = UserController.getAllUsers(db)
         # send_require_add_friend(friend)
         return users
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.post("/acceptfriend", response_model=list[User])
 def acceptFriend(friend: FriendBase, db: Session = Depends(get_db),
@@ -91,13 +119,19 @@ def acceptFriend(friend: FriendBase, db: Session = Depends(get_db),
     try:
         friendInfo = UserController.acceptFriend(db, owner=current_user, friend_id=friend.friendId)
         if friendInfo is None:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Friend not found")
+            return JSONResponse(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                content={"message": "Friend not found"}
+            )
         users = UserController.getAllUsers(db)
         # send_require_add_friend(friend)
         return users
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.patch("/update/me", response_model=User)
 def updateUserInfo(userUpdate: UserUpdate, db: Session = Depends(get_db),
@@ -107,7 +141,10 @@ def updateUserInfo(userUpdate: UserUpdate, db: Session = Depends(get_db),
         return userInfo
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.get("/share/{friendId}")
 def getShareFriendItem(friendId: str, db: Session = Depends(get_db),
@@ -117,4 +154,7 @@ def getShareFriendItem(friendId: str, db: Session = Depends(get_db),
         return userInfo
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )

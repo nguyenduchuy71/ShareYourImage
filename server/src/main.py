@@ -19,8 +19,7 @@ from kafka import KafkaConsumer
 
 load_dotenv()
 app = FastAPI()
-database.Base.metadata.create_all(bind=database.engine)
-consumer = KafkaConsumer('order_details', bootstrap_servers='localhost:29092')
+# consumer = KafkaConsumer('order_details', bootstrap_servers='localhost:29092')
 
 # KAFKA_BROKER = 'localhost:9092'
 # KAFKA_TOPIC = 'order_topic'
@@ -56,7 +55,10 @@ app.include_router(itemRouter)
 
 @app.on_event("startup")
 async def start_consumer():
+    logger.info("Startup the application")
+    database.Base.metadata.create_all(bind=database.engine)
     def consume_messages():
+        pass
         # consumer.subscribe([KAFKA_TOPIC])
         # while True:
         #     msg = consumer.poll(1.0)
@@ -70,23 +72,21 @@ async def start_consumer():
         #             break
         #     order_data = json.loads(msg.value().decode('utf-8'))
         #     logger.info(f"Received order: {order_data}")
-        while True:
-            for message in consumer:
-                logger.info("Here is a message..")
-                logger.info(message)
+        # while True:
+        #     for message in consumer:
+        #         logger.info("Here is a message..")
+        #         logger.info(message)
 
-    loop = asyncio.get_event_loop()
-    loop.run_in_executor(None, consume_messages)
+    # loop = asyncio.get_event_loop()
+    # loop.run_in_executor(None, consume_messages)
 
 @app.on_event("shutdown")
 def shutdown_event():
     logger.info("Shutting down the application")
-    consumer.close()
-    sys.exit(1)
+    # consumer.close()
 
 def signal_handler(sig, frame):
     logger.info("Received termination signal, shutting down gracefully...")
-    sys.exit(0)
 
 # Register signal handlers
 signal.signal(signal.SIGINT, signal_handler)

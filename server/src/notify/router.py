@@ -1,4 +1,5 @@
-from fastapi import Depends, APIRouter, HTTPException, status
+from fastapi import Depends, APIRouter, status
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from db.database import get_db
 from notify.schema import Notify
@@ -18,4 +19,7 @@ def getAllNotify(skip: int = 0, limit: int = 100, db: Session = Depends(get_db),
         return NotifyController.getAllNotifies(db, owner_id=current_user.id, skip=skip, limit=limit)
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )

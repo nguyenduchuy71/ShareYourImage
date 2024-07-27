@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, status, HTTPException, UploadFile, File
+from fastapi import APIRouter, Depends, status, UploadFile, File
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from firebase_admin import storage
 from auth.utills import AuthUtil
@@ -24,7 +25,10 @@ def getCollections(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return items
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.post("/")
 def postCollections(files: list[UploadFile] = File(...), db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -39,30 +43,43 @@ def postCollections(files: list[UploadFile] = File(...), db: Session = Depends(g
         return listFileUpload
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.delete("/{ownerId}/{imagePath}")
 def deleteCollections(ownerId:str, imagePath:str, srcImage:str = '', db:Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
     try:
         item = ItemController.delete_user_item(db=db, ownerId=ownerId, itemPath=imagePath, srcImage=srcImage)
-        if item:
-            blob_path = f"{ownerId}/{imagePath}"
-            storageController.remove_file(blob_path)
-            return status.HTTP_204_NO_CONTENT
-        else:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="items not found")
+        if item is None:
+            return JSONResponse(
+                status_code=status.HTTP_404_NOT_FOUND,
+                content={"message": "Items not found"}
+            )
+        blob_path = f"{ownerId}/{imagePath}"
+        storageController.remove_file(blob_path)
+        return status.HTTP_204_NO_CONTENT
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
 
 @router.post("/share/{friendId}")
 def shareCollection(friendId: str, item:CollectionShare, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
     try:
         itemShare = ItemController.share_friend_item(db, current_user.id, friendId, item.srcImage)
-        if itemShare:
-            return status.HTTP_200_OK
-        else:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="items not found")
+        if itemShare is None:
+            return JSONResponse(
+                status_code=status.HTTP_404_NOT_FOUND,
+                content={"message": "Items not found"}
+            )
+        return status.HTTP_200_OK
     except Exception as error:
         logger.error(error)
-        return error
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            content={"message": "Internal Server Error"}
+        )
