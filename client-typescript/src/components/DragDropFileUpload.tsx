@@ -102,8 +102,8 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
         />
         <label htmlFor="raised-button-file">
           <Box display="flex" flexDirection="column" alignItems="center">
-            <IconButton className="hover:opacity-80" color="error" aria-label="upload picture" component="span">
-              <CloudUploadIcon style={{ fontSize: 60 }} />
+            <IconButton className="hover:opacity-90" aria-label="upload picture" component="span">
+              <CloudUploadIcon style={{ fontSize: 60, color: '#ABF600' }} />
             </IconButton>
             <Typography className='font-bold text-white'>Drag and drop files here or click to select files</Typography>
           </Box>

@@ -120,7 +120,7 @@ function CollectionScreen({ socket }) {
                       <div className="absolute -right-2 -top-2 w-7 h-7 cursor-pointer"
                       >
                         <XCircleIcon
-                          className='text-[#ABF600] hover:opacity-80'
+                          className="text-[#ABF600] hover:text-[#ee1d4f]"
                           onClick={() => handleDeleteCollection(collection.fullPath, collection.srcImage)}
                         />
                       </div>

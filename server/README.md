@@ -33,7 +33,7 @@ To get started with the project, follow these steps:
 
 5. Install libraries:
     ```sh
-    pip install -r requirements.txt
+    pip install -r requirements/dev.txt
     ```
 
 ## Usage

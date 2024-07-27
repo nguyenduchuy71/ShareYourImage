@@ -8,9 +8,9 @@ interface ICustomIcon {
 
 export const CustomIconItem = ({ CustomIconImage, path, name }: ICustomIcon) => {
   return (
-    <Link to={path} className="p-4 flex items-center hover:opacity-80">
+    <Link to={path} className="p-4 flex justify-start hover:opacity-80">
       <CustomIconImage className="h-5 w-5 lg:mr-2 md:mr-2 sm:mr-0 xs:mr-0" />
-      <span className="hidden lg:block md:block">{name}</span>
+      <span className="flex-1 hidden lg:block md:block">{name}</span>
     </Link>
   );
 };

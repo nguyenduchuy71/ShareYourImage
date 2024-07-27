@@ -15,7 +15,7 @@ function NotifyScreen() {
 
   return (
     <div className="mt-10 mx-auto lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
-      <div className="bg-[#1D1D1D] rounded-xl p-6 border-2 lg:border-[#ABF600] md:border-transparent sm:border-transparent xs:border-transparent">
+      <div className="bg-[#1D1D1D] rounded-xl p-6 lg:border-2 lg:border-[#ABF600] md:border-none sm:border-none xs:border-none md:border-transparent sm:border-transparent xs:border-transparent">
         <div className="flex flex-col gap-4 text-lg">
           {notify.length > 0 ? (
             notify.map((item, index) => (

@@ -9,7 +9,6 @@ class CollectionShare(CollectionBase):
 class ItemBase(BaseModel):
     title: str
 
-
 class ItemCreate(ItemBase):
     pass
 

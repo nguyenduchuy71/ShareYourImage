@@ -1,6 +1,4 @@
-import os
 from fastapi import APIRouter, Depends, status, HTTPException, UploadFile, File
-from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 from firebase_admin import storage
 from auth.utills import AuthUtil
@@ -9,15 +7,14 @@ from items.controller import ItemController
 from db.database import get_db
 from items.schema import CollectionShare, Item
 from log.logger import logger
-
-load_dotenv()
+from items.config import FIREBASE_STORAGE_BUCKET
 
 router = APIRouter(
     prefix="/items",
     tags=["items"],
     responses={404: {"description": "Not found"}},
 )
-bucket = storage.bucket(os.getenv('FIREBASE_STORAGE_BUCKET'))
+bucket = storage.bucket(FIREBASE_STORAGE_BUCKET)
 storageController = StorageControler(bucket)
 
 @router.get("/", response_model=list[Item])
@@ -27,7 +24,7 @@ def getCollections(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return items
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.post("/")
 def postCollections(files: list[UploadFile] = File(...), db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -42,7 +39,7 @@ def postCollections(files: list[UploadFile] = File(...), db: Session = Depends(g
         return listFileUpload
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.delete("/{ownerId}/{imagePath}")
 def deleteCollections(ownerId:str, imagePath:str, srcImage:str = '', db:Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):

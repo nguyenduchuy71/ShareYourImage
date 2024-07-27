@@ -24,7 +24,7 @@ def createUser(user: UserCreate, db: Session = Depends(get_db)):
         return UserController.createUser(db=db, user=user)
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.get("/", response_model=list[User])
 def getAllUsers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -33,7 +33,7 @@ def getAllUsers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db), 
         return users
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.get("/{user_id}", response_model=User)
 def getUserById(user_id: int, db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -41,7 +41,7 @@ def getUserById(user_id: int, db: Session = Depends(get_db), current_user = Depe
         return current_user
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.get("/friends/me", response_model=list[User])
 def getUserFriends(db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -50,7 +50,7 @@ def getUserFriends(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return friends
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.get("/profile/me", response_model=User)
 def getUserProfile(db: Session = Depends(get_db), current_user = Depends(AuthUtil.getCurrentUser)):
@@ -58,8 +58,7 @@ def getUserProfile(db: Session = Depends(get_db), current_user = Depends(AuthUti
         return current_user
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
-    
+        return error
 
 @router.post("/{user_id}/items/", response_model=Item)
 def createUserItem(
@@ -70,7 +69,7 @@ def createUserItem(
         return UserController.createUserItem(db=db, item=item, user_id=user_id)
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.post("/addfriend", response_model=list[User])
 def addFriend(friend: FriendBase, db: Session = Depends(get_db),
@@ -84,7 +83,7 @@ def addFriend(friend: FriendBase, db: Session = Depends(get_db),
         return users
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.post("/acceptfriend", response_model=list[User])
 def acceptFriend(friend: FriendBase, db: Session = Depends(get_db),
@@ -98,7 +97,7 @@ def acceptFriend(friend: FriendBase, db: Session = Depends(get_db),
         return users
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.patch("/update/me", response_model=User)
 def updateUserInfo(userUpdate: UserUpdate, db: Session = Depends(get_db),
@@ -108,7 +107,7 @@ def updateUserInfo(userUpdate: UserUpdate, db: Session = Depends(get_db),
         return userInfo
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error
 
 @router.get("/share/{friendId}")
 def getShareFriendItem(friendId: str, db: Session = Depends(get_db),
@@ -118,4 +117,4 @@ def getShareFriendItem(friendId: str, db: Session = Depends(get_db),
         return userInfo
     except Exception as error:
         logger.error(error)
-        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="SERVER ERROR")
+        return error

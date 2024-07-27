@@ -44,7 +44,7 @@ export default function ProfileScreen() {
 
   return (
     <div
-      className="shadow-2xl mx-auto my-6 p-6 rounded-xl border-2 border-[#ABF600] lg:w-[70%] md:w-[90%] sm:w-[100%] xs:w-[100%]">
+      className="shadow-2xl lg:mx-auto md:mx-4 sm:mx-4 xs:mx-4 my-6 p-6 rounded-2xl border-2 border-[#ABF600] divide-y divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
 
       <div
         className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">

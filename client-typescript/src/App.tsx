@@ -16,6 +16,7 @@ import MainScreen from './features/main';
 import Footer from './components/footer';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import logo from './assets/img/logo.png'
 
 const url = `http://localhost:${import.meta.env.VITE_SOCKET_PORT}`;
 const socket = io(url);
@@ -48,7 +49,12 @@ function App() {
           {authToken &&
             <React.Fragment>
               <div className="flex justify-between">
-                <Sidebar />
+                <div className="flex flex-col">
+                  <div className="flex justify-center bg-[#272727]">
+                    <img src={logo} className="object-cover w-24 h-24 m-2 rounded-full lg:bg-[#1D1D1D] md:bg-[#1D1D1D] sm:bg-none xs:bg-none" />
+                  </div>
+                  <Sidebar />
+                </div>
                 <Routes>
                   <Route path="/" index element={<MainScreen />} />
                   <Route path="/collection" element={<CollectionScreen socket={socket} />} />

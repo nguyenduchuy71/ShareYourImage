@@ -48,8 +48,8 @@ function FriendScreen({ socket }) {
   };
 
   return (
-    <div className="mx-auto my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
-      <div className="p-6 rounded-2xl border lg:border-[#ABF600] md:border-transparent sm:border-transparent xs:border-transparent divide-y divide-[#ABF600]">
+    <div className="lg:mx-auto md:mx-4 sm:mx-4 xs:mx-4 my-6 lg:w-[50%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+      <div className="p-6 rounded-2xl border-2 border-[#ABF600] divide-y divide-[#ABF600]">
         <SearchItem
           type="search"
           placeholder="Search your friends"
