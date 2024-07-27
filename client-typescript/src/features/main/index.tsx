@@ -36,7 +36,7 @@ function MainScreen() {
       {!isLoading ? (
         <div>
           {friends.length > 0 && (
-            <DropBoxFriend friends={friends} setSelectedFriend={setSelectedFriend} />
+            <DropBoxFriend friends={friends} selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />
           )}
           <div className="my-6">
             {shareImages.length > 0 ? (

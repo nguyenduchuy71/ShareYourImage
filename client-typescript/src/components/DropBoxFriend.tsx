@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
@@ -6,8 +6,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-function DropBoxFriend({ friends, setSelectedFriend }) {
+function DropBoxFriend({ friends, selectedFriend, setSelectedFriend }) {
   const [selected, setSelected] = useState(friends[0]);
+
+  useEffect(() => {
+    if (selectedFriend) {
+      setSelected(selectedFriend)
+    }
+  }, [selectedFriend])
+
   return (
     <Listbox
       value={selected}
@@ -51,7 +58,7 @@ function DropBoxFriend({ friends, setSelectedFriend }) {
                   }
                   value={friend}
                 >
-                  {({ selected, active }) => (
+                  {({ selected }) => (
                     <div>
                       <div className="flex items-center hover:text-[#ABF600]">
                         <img
@@ -68,17 +75,11 @@ function DropBoxFriend({ friends, setSelectedFriend }) {
                           {friend.username}
                         </span>
                       </div>
-
-                      {selected ? (
-                        <span
-                          className={classNames(
-                            active ? 'text-white' : 'text-indigo-600',
-                            'absolute inset-y-0 right-0 flex items-center pr-4',
-                          )}
-                        >
+                      {friend.id === selectedFriend.id && (
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-black font-semibold">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>
-                      ) : null}
+                      )}
                     </div>
                   )}
                 </Listbox.Option>

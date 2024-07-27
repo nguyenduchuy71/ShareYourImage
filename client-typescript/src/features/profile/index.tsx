@@ -4,6 +4,7 @@ import { ButtonItem } from '@/components/ButtonItem';
 import { IProfileStore } from './epic/interface';
 import { CameraIcon } from '@heroicons/react/24/solid';
 import { Input } from '@/components/ui/input';
+import userImg from '@/assets/img/user.jfif'
 
 export default function ProfileScreen() {
   const [username, setUsername] = useState("");
@@ -43,15 +44,12 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div
-      className="shadow-2xl lg:mx-auto md:mx-4 sm:mx-4 xs:mx-4 my-6 p-6 rounded-2xl border-2 border-[#ABF600] divide-y divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
-
-      <div
-        className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
+    <div className="mx-auto my-6 p-6 rounded-2xl border-2 border-[#ABF600] divide-y-2 divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+      <div className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
 
         <div className="my-2 flex justify-center relative py-2">
           <img
-            src={avatar ? avatar : 'https://github.com/shadcn.png'}
+            src={avatar ? avatar : userImg}
             className="w-44 h-44 rounded-full object-center inline-block"
             alt="Avatar"
           />
@@ -74,7 +72,7 @@ export default function ProfileScreen() {
         </div>
       </div>
 
-      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap">
+      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap border-none">
         <div className="w-full">
           <h3 className="my-2 font-bold">First name</h3>
           <Input
@@ -100,7 +98,7 @@ export default function ProfileScreen() {
         </div>
       </div>
 
-      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap">
+      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap border-none">
         <div className="w-full">
           <h3 className="my-2 font-bold">Username</h3>
           <Input
@@ -126,12 +124,12 @@ export default function ProfileScreen() {
         </div>
       </div>
 
-      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap">
+      <div className="my-2 flex flex-row gap-x-10 flex-wrap lg:flex-nowrap border-none">
         <div className="w-full">
           <h3 className="my-2 font-bold">Sex</h3>
           <select
             className="w-full rounded-lg p-2 border border-gray-500">
-            <option disabled value="">Select Sex</option>
+            <option disabled value="" className='bg-[#ABF600]'>Select Sex</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>

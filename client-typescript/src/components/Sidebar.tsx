@@ -60,7 +60,8 @@ export function Sidebar() {
             />
           </div>
         ))}
-        <div className="my-2 hover:bg-[#1D1D1D] rounded-md" onClick={() => logoutEpic()}>
+        <div className="my-2 hover:bg-[#1D1D1D] rounded-md"
+          onClick={() => logoutEpic()}>
           <CustomIconItem
             name="Log Out"
             CustomIconImage={ArrowLeftEndOnRectangleIcon}
