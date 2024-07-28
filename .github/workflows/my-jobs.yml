@@ -21,6 +21,7 @@ jobs:
           echo "ACCESS_TOKEN_EXPIRE_MINUTES=60" >> $GITHUB_ENV
           echo "ALGORITHM=HS256" >> $GITHUB_ENV
           echo "SECRET_KEY=mysecretkey" >> $GITHUB_ENV
+          echo "FIREBASE_CONFIG_KEY=fakeKey" >> $GITHUB_ENV
       - name: Unit tests
         run: |
           source env/bin/activate
