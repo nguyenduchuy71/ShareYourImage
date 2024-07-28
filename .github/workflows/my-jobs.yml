@@ -15,7 +15,7 @@ jobs:
       - run: |
           source env/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r server/requirements/dev.txt
       - name: Set environment variables
         run: |
           echo "ACCESS_TOKEN_EXPIRE_MINUTES=60" >> $GITHUB_ENV
@@ -24,4 +24,4 @@ jobs:
       - name: Unit tests
         run: |
           source env/bin/activate
-          sh bin/run_tests.sh
+          sh server/bin/run_tests.sh
