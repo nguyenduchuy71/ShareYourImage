@@ -21,9 +21,9 @@ jobs:
           python -m venv env
           source env/bin/activate
           pip install --upgrade pip
-          pip install -r server/requirements/dev.txt
+          pip install -r requirements/dev.txt
       - name: Unit tests
         run: |
           cd server
           source env/bin/activate
-          sh server/bin/run_tests.sh
+          sh bin/run_tests.sh
