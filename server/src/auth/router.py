@@ -6,7 +6,7 @@ from auth.schema import Token
 from users.schema import user
 from users.models import User
 from users.controller import UserController
-from auth.utills import AuthUtil
+from auth.utils import AuthUtil
 from log.logger import logger
 
 router = APIRouter(tags=['Authentication'])

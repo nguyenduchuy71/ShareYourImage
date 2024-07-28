@@ -5,7 +5,7 @@ from users.models import User, Friend
 from items.models import Item, UserShareItem
 from items.schema import ItemCreate
 from notify.models import Notify
-from auth.utills import AuthUtil
+from auth.utils import AuthUtil
 
 class UserController:
     

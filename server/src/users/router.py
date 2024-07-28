@@ -6,7 +6,7 @@ from items.schema import Item, ItemCreate
 from users.schema.friend import FriendBase
 from log.logger import logger
 from db.database import get_db
-from auth.utills import AuthUtil
+from auth.utils import AuthUtil
 from users.controller import UserController
 # from broker.producer_service import send_require_add_friend
 

@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from db.database import get_db
 from notify.schema import Notify
 from notify.controller import NotifyController
-from auth.utills import AuthUtil
+from auth.utils import AuthUtil
 from log.logger import logger
 
 router = APIRouter(

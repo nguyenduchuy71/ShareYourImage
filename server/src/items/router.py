@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, UploadFile, File
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from firebase_admin import storage
-from auth.utills import AuthUtil
+from auth.utils import AuthUtil
 from firebase.storage import StorageControler
 from items.controller import ItemController
 from db.database import get_db

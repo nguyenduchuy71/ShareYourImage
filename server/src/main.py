@@ -57,8 +57,8 @@ app.include_router(itemRouter)
 async def start_consumer():
     logger.info("Startup the application")
     database.Base.metadata.create_all(bind=database.engine)
-    def consume_messages():
-        pass
+    
+    # def consume_messages():
         # consumer.subscribe([KAFKA_TOPIC])
         # while True:
         #     msg = consumer.poll(1.0)
