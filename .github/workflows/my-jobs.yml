@@ -15,7 +15,8 @@ jobs:
           echo "ACCESS_TOKEN_EXPIRE_MINUTES=60" >> $GITHUB_ENV
           echo "ALGORITHM=HS256" >> $GITHUB_ENV
           echo "SECRET_KEY=mysecretkey" >> $GITHUB_ENV
-          echo "FIREBASE_CONFIG_KEY=fakseServiceAccountKey.json" >> $GITHUB_ENV
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > fakseServiceAccountKey.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/fakseServiceAccountKey.json" >> $GITHUB_ENV
       - run: |
           cd server
           python -m venv env
