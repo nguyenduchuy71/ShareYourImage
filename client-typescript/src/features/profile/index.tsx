@@ -44,7 +44,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="mx-auto my-6 p-6 rounded-2xl border-2 border-[#ABF600] divide-y-2 divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+    <div className="mx-auto my-6 p-6 rounded-2xl border-2 border-transparent lg:border-[#ABF600] divide-y-2 divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
       <div className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
 
         <div className="my-2 flex justify-center relative py-2">

@@ -75,7 +75,7 @@ function DropBoxFriend({ friends, selectedFriend, setSelectedFriend }) {
                           {friend.username}
                         </span>
                       </div>
-                      {friend.id === selectedFriend.id && (
+                      {selectedFriend && friend.id === selectedFriend.id && (
                         <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-black font-semibold">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />
                         </span>

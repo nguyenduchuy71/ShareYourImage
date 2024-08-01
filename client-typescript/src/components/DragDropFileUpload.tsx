@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Box, Paper, Typography, IconButton, Grid, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { CloudArrowUpIcon } from '@heroicons/react/20/solid';
 import ImagePreview from './ImagePreview';
 import { Loading } from './Loading';
 
@@ -103,7 +103,7 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
         <label htmlFor="raised-button-file">
           <Box display="flex" flexDirection="column" alignItems="center">
             <IconButton className="hover:opacity-90" aria-label="upload picture" component="span">
-              <CloudUploadIcon style={{ fontSize: 60, color: '#ABF600' }} />
+              <CloudArrowUpIcon className='w-16 text-[#ABF600]' />
             </IconButton>
             <Typography className='font-bold text-white'>Drag and drop files here or click to select files</Typography>
           </Box>

@@ -49,7 +49,7 @@ function FriendScreen({ socket }) {
   };
 
   return (
-    <div className="w-full mx-auto my-6 p-6 rounded-2xl border-2 border-[#ABF600] lg:w-[50%] md:w-[80%] sm:w-[90%] xs:w-[90%] divide-y-2 divide-[#ABF600]">
+    <div className="w-full mx-auto my-6 p-6 rounded-2xl border-2 border-transparent lg:border-[#ABF600] lg:w-[50%] md:w-[80%] sm:w-[90%] xs:w-[90%] divide-y-2 divide-[#ABF600]">
       <SearchItem
         type="search"
         placeholder="Search your friends"

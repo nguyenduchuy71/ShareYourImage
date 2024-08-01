@@ -51,7 +51,7 @@ function App() {
               <div className="flex justify-between">
                 <div className="flex flex-col">
                   <div className="flex justify-center bg-[#272727]">
-                    <img src={logo} className="object-cover w-24 h-24 m-2 rounded-full lg:bg-[#1D1D1D] md:bg-[#1D1D1D] sm:bg-none xs:bg-none" />
+                    <img src={logo} className="object-cover w-24 h-24 m-2 rounded-full bg-none md:bg-[#1D1D1D]" />
                   </div>
                   <Sidebar />
                 </div>

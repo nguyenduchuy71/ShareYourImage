@@ -48,7 +48,7 @@ export function Sidebar() {
   const [selectedMenu, setSelectedMenu] = useState(listMenu[0])
 
   return (
-    <div className="sticky top-0 min-h-screen pr-4 bg-[#272727] text-[#ABF600] font-semibold lg:w-[13rem] md:w-[13rem] sm:w-[8rem] xs:w-[8rem]">
+    <div className="sticky top-0 min-h-screen pr-4 bg-[#272727] text-[#ABF600] font-semibold w-[4rem] md:w-[12rem]">
       <div className="flex flex-col">
         {listMenu.map((menu) => (
           <div key={menu.name} onClick={() => setSelectedMenu(menu)} className={`my-2 hover:bg-[#1D1D1D] rounded-md ${selectedMenu.path === menu.path && 'shadow-xl shadow-black bg-[#404040] rounded-e-lg'}`}>

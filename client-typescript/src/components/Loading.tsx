@@ -1,18 +1,13 @@
-import { CircularProgress } from "@mui/material";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const Loading = () => {
   return (
-    <div className="relative">
-      <CircularProgress
-        size={30}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          marginTop: '-12px',
-          marginLeft: '-12px',
-        }}
-      />
+    <div className="flex items-center space-x-4">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
     </div>
   );
 };

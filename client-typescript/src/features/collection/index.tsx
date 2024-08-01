@@ -12,8 +12,7 @@ import DragDropFileUpload from '@/components/DragDropFileUpload';
 import EmptyData from '@/components/EmptyData';
 import Modal from '@/components/Modal';
 import ImageViewer from 'react-simple-image-viewer';
-import ShareIcon from '@mui/icons-material/Share';
-import PreviewIcon from '@mui/icons-material/Preview';
+import { ShareIcon, ViewfinderCircleIcon } from '@heroicons/react/20/solid';
 
 function CollectionScreen({ socket }) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -125,10 +124,10 @@ function CollectionScreen({ socket }) {
                         />
                       </div>
                       <div className="absolute left-1 bottom-11 p-1 bg-[#ABF600] text-[#212121] rounded-md font-semibold text-whiteshadow-sm hover:opacity-75" onClick={() => handlePreviewImage(index)}>
-                        <PreviewIcon className="cursor-pointer" />
+                        <ViewfinderCircleIcon className="cursor-pointer w-5" />
                       </div>
                       <div className="absolute left-1 bottom-1 p-1 bg-[#ABF600] text-[#212121] rounded-md font-semibold text-whiteshadow-sm hover:opacity-75" onClick={() => handleModalShareImage(collection)}>
-                        <ShareIcon className="cursor-pointer" />
+                        <ShareIcon className="cursor-pointer w-5" />
                       </div>
                     </div>
                   );

@@ -1,30 +1,23 @@
 import React from 'react'
-import { Box, IconButton, Grid } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { XCircleIcon } from '@heroicons/react/20/solid';
 
 const ImagePreview = ({ imagePreviews, handleRemoveImage }) => {
     return (
         imagePreviews.map((src, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-                <div className="relative flex justify-center rounded-lg border-2 border-gray-400 p-2">
-                    <Box
-                        component="img"
+            <div className="grid gap-4 grid-flow-col auto-cols-max py-4 mx-4">
+                <div className="relative flex justify-center rounded-lg border-2 border-gray-400">
+                    <img
+                        className='w-40 h-40 rounded-md object-cover'
                         src={src}
                         alt={`Image Preview ${index + 1}`}
-                        sx={{ width: '100px', height: '100px', objectFit: 'cover' }}
                     />
-                    <IconButton
+                    <div
                         onClick={() => handleRemoveImage(index)}
-                        sx={{
-                            position: 'absolute',
-                            top: '-8px',
-                            right: '-8px',
-                        }}
-                    >
-                        <DeleteIcon className='hover:opacity-70' />
-                    </IconButton>
+                        className="absolute -top-1 -right-2">
+                        <XCircleIcon className='hover:opacity-80 w-5 cursor-pointer' />
+                    </div>
                 </div>
-            </Grid>
+            </div>
         ))
     )
 }
