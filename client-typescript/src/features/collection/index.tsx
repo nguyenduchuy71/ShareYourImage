@@ -93,7 +93,7 @@ function CollectionScreen({ socket }) {
       </div>
 
       <div className="mt-8">
-        <div className="my-8 flex justify-between items-center">
+        <div className="my-4 flex justify-between items-center">
           <p className="text-pretty text-lg font-semibold">Your images</p>
           <Modal
             friends={friends}

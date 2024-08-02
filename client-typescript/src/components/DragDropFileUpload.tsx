@@ -1,8 +1,22 @@
 import { useCallback, useState } from 'react';
-import { Box, Paper, Typography, IconButton, Grid, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { CloudArrowUpIcon } from '@heroicons/react/20/solid';
-import ImagePreview from './ImagePreview';
 import { Loading } from './Loading';
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { XCircleIcon } from '@heroicons/react/20/solid';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 function DragDropFileUpload({ uploadCollectionEpic }) {
   const [dragOver, setDragOver] = useState(false);
@@ -77,9 +91,8 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
   };
 
   return (
-    <Box>
-      <Paper
-        variant="outlined"
+    <div>
+      <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -94,37 +107,56 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
       >
         <input
           accept="image/*"
-          style={{ display: 'none' }}
+          className='hidden'
           id="raised-button-file"
           multiple
           type="file"
           onChange={handleChange}
         />
         <label htmlFor="raised-button-file">
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <IconButton className="hover:opacity-90" aria-label="upload picture" component="span">
-              <CloudArrowUpIcon className='w-16 text-[#ABF600]' />
-            </IconButton>
-            <Typography className='font-bold text-white'>Drag and drop files here or click to select files</Typography>
-          </Box>
+          <div className='flex justify-center items-center flex-col'>
+            <CloudArrowUpIcon className='w-16 text-[#ABF600] cursor-pointer hover:opacity-80' />
+            <p className='font-bold text-white'>Drag and drop files here or click to select files</p>
+          </div>
         </label>
         {loading && (
           <Loading />
         )}
-      </Paper>
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle className='text-[#212121] font-bold'>Confirm Upload</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2}>
-            <ImagePreview imagePreviews={imagePreviews} handleRemoveImage={handleRemoveImage} />
-          </Grid>
+      </div>
+      <Dialog open={open}>
+        <DialogContent className="w-full h-fit">
+          <DialogHeader>
+            <DialogTitle className='text-[#212121] font-bold'>Confirm Upload</DialogTitle>
+          </DialogHeader>
+          <Carousel className="w-full mx-auto">
+            <CarouselContent>
+              {Array.from(imagePreviews).map((src, index) => (
+                <CarouselItem key={index} className="py-2 pl-4 md:basis-1/2 lg:basis-1/3">
+                  <div className="relative rounded-md border-2 border-[#1d1d] p-2">
+                    <img
+                      className='w-40 h-40 object-center rounded-md'
+                      src={src}
+                      alt={`Image Preview ${index + 1}`}
+                    />
+                    <div
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute -top-2 -right-2">
+                      <XCircleIcon className="w-5 cursor-pointer hover:opacity-80" />
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+          <DialogFooter>
+            <Button onClick={handleUploadFiles}>Upload</Button>
+            <Button onClick={handleClose}>Cancel</Button>
+          </DialogFooter>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="secondary">Cancel</Button>
-          <Button onClick={handleUploadFiles} color="primary">Upload</Button>
-        </DialogActions>
       </Dialog>
-    </Box>
+    </div>
   );
 }
 

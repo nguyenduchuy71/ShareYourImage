@@ -129,7 +129,6 @@ export default function ProfileScreen() {
           <h3 className="my-2 font-bold">Sex</h3>
           <select
             className="w-full rounded-lg p-2 border border-gray-500">
-            <option disabled value="" className='bg-[#ABF600]'>Select Sex</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
