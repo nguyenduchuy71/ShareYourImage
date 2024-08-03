@@ -13,6 +13,8 @@ function DropBoxFriend({ friends, selectedFriend, setSelectedFriend }) {
     if (selectedFriend) {
       setSelected(selectedFriend)
     }
+    return () => {
+    };
   }, [selectedFriend])
 
   return (

@@ -5,6 +5,7 @@ import { triggerNotify } from '@/utils/messages';
 import { IProfileStore, IUserUpdate, IUserInfo } from './interface';
 import { storage } from '@/firebase/config';
 import { uploadFile } from '@/lib/utils';
+import { messages } from './messages'
 
 const BASEURL = `http://localhost:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -43,7 +44,7 @@ export const useProfileStore = create<IProfileStore>((set) => ({
       );
       if (res.status === 200) {
         set({ userInfo: res.data });
-        triggerNotify('Save profile successfull');
+        triggerNotify(messages.saveProfileSuccess);
       }
     } catch (error) {
       handleErrorStatus(error);

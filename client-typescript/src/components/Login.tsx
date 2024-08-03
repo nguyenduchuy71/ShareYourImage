@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { IAuthenStore } from "../features/login/epic/interface";
 import { triggerNotify } from "@/utils/messages";
+import { useNavigate } from 'react-router-dom';
 
 interface ILogin {
   isLogin: boolean;
@@ -18,6 +19,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rePassword, setRePassword] = useState();
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     if (isLogin) {
@@ -90,6 +92,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
                 required
                 placeholder="Password"
               />
+              {isLogin && <p className="text-[#ABF600] text-right cursor-pointer hover:font-semibold" onClick={() => navigate('/forgetpassword')}>Forget password?</p>}
             </div>
 
             {!isLogin && (

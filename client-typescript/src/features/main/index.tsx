@@ -23,12 +23,16 @@ function MainScreen() {
     if (friends.length > 0) {
       setSelectedFriend(friends[0]);
     }
+    return () => {
+    };
   }, [getFriendsEpic, isLoading]);
 
   useEffect(() => {
     if (selectedFriend) {
       getShareItemEpic(selectedFriend.id);
     }
+    return () => {
+    };
   }, [getShareItemEpic, selectedFriend]);
 
   return (

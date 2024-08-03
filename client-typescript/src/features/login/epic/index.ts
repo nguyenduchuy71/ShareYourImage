@@ -2,6 +2,7 @@ import axios from 'axios';
 import { create } from 'zustand';
 import { triggerNotify } from '@/utils/messages';
 import { IAuthenStore } from './interface';
+import { messages } from './messages'
 const BASEURL = `http://localhost:${import.meta.env.VITE_BACKEND_PORT}`;
 
 export const useAuthStore = create<IAuthenStore>((set) => ({
@@ -9,7 +10,7 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
   authToken: null,
   error: null,
   loginEpic: async (credentials: any) => {
-    let message = 'Login successful';
+    let message = messages.loginSuccess;
     try {
       const res = await axios.post(`${BASEURL}/login`, credentials);
       if (res.status === 200) {
@@ -23,14 +24,14 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
         set({ authInfo: userInfo });
       }
     } catch (error) {
-      message = 'Login failed';
+      message = messages.loginFail;
       set({ error });
     } finally {
       triggerNotify(message);
     }
   },
   signUpEpic: async (credentials: any) => {
-    let message = 'Sign up successful';
+    let message = messages.signUpSuccess;
     try {
       const res = await axios.post(`${BASEURL}/signup`, credentials);
       if (res.status === 200) {
@@ -45,7 +46,7 @@ export const useAuthStore = create<IAuthenStore>((set) => ({
         set({ authInfo: userInfo });
       }
     } catch (error) {
-      message = 'Sign up fail';
+      message = messages.signUpFail;
       set({ error });
     }
     finally {

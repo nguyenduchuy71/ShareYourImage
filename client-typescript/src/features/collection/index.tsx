@@ -48,14 +48,20 @@ function CollectionScreen({ socket }) {
 
   useEffect(() => {
     getAuthenUserInfo();
+    return () => {
+    };
   }, [getAuthenUserInfo]);
 
   useEffect(() => {
     getCollectionEpic();
+    return () => {
+    };
   }, [uploadCollectionEpic, getCollectionEpic, isCollectionLoading]);
 
   useEffect(() => {
     getFriendsEpic();
+    return () => {
+    };
   }, [getFriendsEpic, isLoading]);
 
   const handleModalShareImage = (collection) => {

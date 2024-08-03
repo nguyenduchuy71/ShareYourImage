@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import DropBoxFriend from './DropBoxFriend';
 
 export default function Modal({ friends, showModal, setShowModal, selectedItem, handleShareImage }) {
@@ -8,7 +8,7 @@ export default function Modal({ friends, showModal, setShowModal, selectedItem, 
     setShowModal(false);
   };
   return (
-    <>
+    <React.Fragment>
       {showModal ? (
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div
@@ -25,7 +25,7 @@ export default function Modal({ friends, showModal, setShowModal, selectedItem, 
                   </p>
                   <div className="w-full mt-2">
                     {friends.length > 0 ? (
-                      <DropBoxFriend friends={friends} setSelectedFriend={setSelectedFriend} />
+                      <DropBoxFriend friends={friends} selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />
                     ) : (
                       <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                         You don't have friend
@@ -52,6 +52,6 @@ export default function Modal({ friends, showModal, setShowModal, selectedItem, 
           </div>
         </div>
       ) : null}
-    </>
+    </React.Fragment>
   );
 }

@@ -5,6 +5,8 @@ import { IProfileStore } from './epic/interface';
 import { CameraIcon } from '@heroicons/react/24/solid';
 import { Input } from '@/components/ui/input';
 import userImg from '@/assets/img/user.jfif'
+import CustomScreen from '@/components/CustomScreen';
+import { ImageItem } from '@/components/ImageItem';
 
 export default function ProfileScreen() {
   const [username, setUsername] = useState("");
@@ -21,12 +23,16 @@ export default function ProfileScreen() {
   ]);
   useEffect(() => {
     getUserEpic();
+    return () => {
+    };
   }, [getUserEpic]);
 
   useEffect(() => {
     setUsername(userInfo.username);
     setBio(userInfo.bio);
     setAvatar(userInfo.avatar);
+    return () => {
+    };
   }, [userInfo]);
 
   const handleUpdateUserInfo = (userInfo: any) => {
@@ -44,14 +50,14 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className="mx-auto my-6 p-6 rounded-2xl border-2 border-transparent lg:border-[#ABF600] divide-y-2 divide-[#ABF600] lg:w-[60%] md:w-[80%] sm:w-[100%] xs:w-[100%]">
+    <CustomScreen>
       <div className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
 
         <div className="my-2 flex justify-center relative py-2">
-          <img
-            src={avatar ? avatar : userImg}
-            className="w-44 h-44 rounded-full object-center inline-block"
-            alt="Avatar"
+          <ImageItem
+            imageSrc={avatar ? avatar : userImg}
+            imageAlt='Avatar'
+            customStyle='w-44 h-44 rounded-full object-center inline-block'
           />
 
           <div className="absolute bottom-0 right-2">
@@ -154,6 +160,6 @@ export default function ProfileScreen() {
           }
         />
       </div>
-    </div>
+    </CustomScreen>
   );
 }

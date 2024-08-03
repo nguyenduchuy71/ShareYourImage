@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { SearchItem } from '../../components/SearchItem';
-import { ButtonItem } from '../../components/ButtonItem';
+import { SearchItem } from '@/components/SearchItem';
+import { ButtonItem } from '@/components/ButtonItem';
+import CustomScreen from '@/components/CustomScreen';
+import CustomStatus from '@/components/CustomStatus';
 import { useFriendStore } from './epic';
 import { useAuthStore } from '../login/epic';
 import { IFriendStore } from './epic/interface';
@@ -26,10 +28,14 @@ function FriendScreen({ socket }) {
 
   useEffect(() => {
     getUsersEpic();
+    return () => {
+    };
   }, [getUsersEpic, socket]);
 
   useEffect(() => {
     getAuthenUserInfo();
+    return () => {
+    };
   }, [getAuthenUserInfo]);
 
   const handleAddFriend = (userId: string) => {
@@ -49,7 +55,7 @@ function FriendScreen({ socket }) {
   };
 
   return (
-    <div className="w-full mx-auto my-6 p-6 rounded-2xl border-2 border-transparent lg:border-[#ABF600] lg:w-[50%] md:w-[80%] sm:w-[90%] xs:w-[90%] divide-y-2 divide-[#ABF600]">
+    <CustomScreen>
       <SearchItem
         type="search"
         placeholder="Search your friends"
@@ -72,19 +78,9 @@ function FriendScreen({ socket }) {
                 <div className="min-w-0 flex-auto">
                   <p className="mt-1 truncate text-sm font-semibold leading-5 text-#[ABF600] overflow-ellipsis">{friend.email}</p>
                   {friend.isActive ? (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                      <div className="flex-none rounded-full  bg-slate-800/20 p-1">
-                        <div className="h-2 w-2 rounded-full bg-[#ee1d4f]" />
-                      </div>
-                      <p className="text-xs font-semibold leading-5 text-white">Offlline</p>
-                    </div>
+                    <CustomStatus isLogin={true} />
                   ) : (
-                    <div className="mt-1 flex items-center gap-x-1.5">
-                      <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                        <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                      </div>
-                      <p className="text-xs font-semibold leading-5 text-white">Online</p>
-                    </div>
+                    <CustomStatus isLogin={false} />
                   )}
                 </div>
               </div>
@@ -133,7 +129,7 @@ function FriendScreen({ socket }) {
             </ListGroup.Item>
           ))}
       </ListGroup>
-    </div>
+    </CustomScreen>
   );
 }
 

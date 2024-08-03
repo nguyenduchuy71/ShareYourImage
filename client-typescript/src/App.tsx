@@ -17,6 +17,7 @@ import SignInScreen from './features/login';
 import MainScreen from './features/main';
 import Footer from './components/footer';
 import logo from './assets/img/logo.png'
+import { ImageItem } from './components/ImageItem';
 
 const url = `http://localhost:${import.meta.env.VITE_SOCKET_PORT}`;
 const socket = io(url);
@@ -29,6 +30,8 @@ function App() {
 
   useEffect(() => {
     getAuthenTokenEpic();
+    return () => {
+    };
   }, [getAuthenTokenEpic]);
 
   useEffect(() => {
@@ -38,6 +41,8 @@ function App() {
         triggerNotify(data);
       });
     }
+    return () => {
+    };
   }, [socket]);
 
   return (
@@ -50,8 +55,8 @@ function App() {
             <React.Fragment>
               <div className="flex justify-between">
                 <div className="flex flex-col">
-                  <div className="flex justify-center bg-[#272727]">
-                    <img src={logo} className="object-cover w-24 h-24 m-2 rounded-full bg-none md:bg-[#1D1D1D]" />
+                  <div className="flex justify-center items-center bg-[#272727]">
+                    <ImageItem imageSrc={logo} imageAlt='logo' customStyle='object-cover w-12 h-12 md:w-24 md:h-24 m-2 rounded-full bg-none md:bg-[#1D1D1D]' />
                   </div>
                   <Sidebar />
                 </div>

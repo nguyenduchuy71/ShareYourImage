@@ -13,6 +13,8 @@ function SignInScreen() {
     if (window.location.href.includes("signup")) {
       setIsLogin(false);
     }
+    return () => {
+    };
   }, []);
   return <Login isLogin={isLogin} setIsLogin={setIsLogin} />;
 }

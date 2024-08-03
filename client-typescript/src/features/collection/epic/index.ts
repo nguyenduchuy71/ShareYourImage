@@ -4,6 +4,7 @@ import { configHeaders, handleErrorStatus, handleSortListObjectCollection } from
 import { triggerNotify } from '@/utils/messages';
 import { storage } from '@/firebase/config';
 import { ICollectionStore } from './interface';
+import { messages } from './messages'
 
 const BASEURL = `http://localhost:${import.meta.env.VITE_BACKEND_PORT}`;
 
@@ -72,7 +73,7 @@ export const useCollectionStore = create<ICollectionStore>((set, get) => ({
                   }
                 });
               });
-              triggerNotify('Upload collections successfull');
+              triggerNotify(messages.uploadSuccess);
             })
             .catch((error) => {
               set({ error });
@@ -99,7 +100,7 @@ export const useCollectionStore = create<ICollectionStore>((set, get) => ({
           (collection) => collection.fullPath !== imagePath,
         );
         set({ collections: updateCollections });
-        triggerNotify('Remove image successfull');
+        triggerNotify(messages.removeImageSuccess);
       }
     } catch (error) {
       handleErrorStatus(error);
@@ -122,7 +123,7 @@ export const useCollectionStore = create<ICollectionStore>((set, get) => ({
         },
       );
       if (res.status === 200) {
-        triggerNotify('Share image successfull');
+        triggerNotify(messages.shareImageSuccess);
       }
     } catch (error) {
       handleErrorStatus(error);
