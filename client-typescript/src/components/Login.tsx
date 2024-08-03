@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { IAuthenStore } from "../features/login/epic/interface";
 import { triggerNotify } from "@/utils/messages";
 import { useNavigate } from 'react-router-dom';
+import ForgetPassword from "@/features/forgetpassword";
 
 interface ILogin {
   isLogin: boolean;
@@ -16,6 +17,7 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
     state.loginEpic,
     state.signUpEpic,
   ]);
+  const [open, setOpen] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [rePassword, setRePassword] = useState();
@@ -92,7 +94,10 @@ export const Login = ({ isLogin, setIsLogin }: ILogin) => {
                 required
                 placeholder="Password"
               />
-              {isLogin && <p className="text-[#ABF600] text-right cursor-pointer hover:font-semibold" onClick={() => navigate('/forgetpassword')}>Forget password?</p>}
+              {isLogin && <React.Fragment>
+                <p className="text-[#ABF600] text-right cursor-pointer hover:font-semibold" onClick={() => setOpen(true)}>Forget password?</p>
+                <ForgetPassword open={open} setOpen={setOpen} />
+              </React.Fragment>}
             </div>
 
             {!isLogin && (
