@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { ImageItem } from './ImageItem';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -29,10 +30,10 @@ function DropBoxFriend({ friends, selectedFriend, setSelectedFriend }) {
         <div className="relative mt-2">
           <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-xl ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6">
             <span className="flex items-center">
-              <img
-                src={selected.avatar}
-                alt="avatar"
-                className="h-5 w-5 flex-shrink-0 rounded-full"
+              <ImageItem
+                imageSrc={selected.avatar}
+                imageAlt="avatar"
+                customStyle="h-5 w-5 flex-shrink-0 rounded-full"
               />
               <span className="ml-3 block truncate text-black">{selected.username}</span>
             </span>
@@ -63,15 +64,15 @@ function DropBoxFriend({ friends, selectedFriend, setSelectedFriend }) {
                   {({ selected }) => (
                     <div>
                       <div className="flex items-center hover:text-[#ABF600]">
-                        <img
-                          src={friend.avatar}
-                          alt=""
-                          className="h-5 w-5 flex-shrink-0 rounded-full"
+                        <ImageItem
+                          imageSrc={friend.avatar}
+                          imageAlt="avatar"
+                          customStyle="h-5 w-5 flex-shrink-0 rounded-full"
                         />
                         <span
                           className={classNames(
                             selected ? 'font-semibold' : 'font-normal',
-                            'ml-3 block truncate text-black',
+                            'ml-2 block truncate text-black',
                           )}
                         >
                           {friend.username}

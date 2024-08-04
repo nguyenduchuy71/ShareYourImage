@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DropBoxFriend from './DropBoxFriend';
+import { Button } from "@/components/ui/button"
 
 export default function Modal({ friends, showModal, setShowModal, selectedItem, handleShareImage }) {
   const [selectedFriend, setSelectedFriend] = useState(null);
@@ -25,26 +26,21 @@ export default function Modal({ friends, showModal, setShowModal, selectedItem, 
                   </p>
                   <div className="w-full mt-2">
                     {friends.length > 0 ? (
-                      <DropBoxFriend friends={friends} selectedFriend={selectedFriend} setSelectedFriend={setSelectedFriend} />
+                      <DropBoxFriend friends={friends} selectedFriend={selectedFriend}
+                        setSelectedFriend={setSelectedFriend} />
                     ) : (
                       <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                         You don't have friend
                       </p>
                     )}
                   </div>
-                  <div className="items-center gap-2 mt-3 sm:flex">
-                    <button
-                      className="w-0.5 mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
-                      onClick={() => handleAction()}
-                    >
+                  <div className="items-center justify-end gap-2 mt-3 sm:flex">
+                    <Button onClick={() => handleAction()}>
                       Share
-                    </button>
-                    <button
-                      className="w-0.5 mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                      onClick={() => setShowModal(false)}
-                    >
+                    </Button>
+                    <Button variant='destructive' onClick={() => setShowModal(false)}>
                       Cancel
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

@@ -17,6 +17,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { ImageItem } from './ImageItem';
+import { Input } from '@/components/ui/input';
+
 
 function DragDropFileUpload({ uploadCollectionEpic }) {
   const [dragOver, setDragOver] = useState(false);
@@ -105,7 +108,7 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
           position: 'relative',
         }}
       >
-        <input
+        <Input
           accept="image/*"
           className='hidden'
           id="raised-button-file"
@@ -132,11 +135,11 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
             <CarouselContent>
               {Array.from(imagePreviews).map((src, index) => (
                 <CarouselItem key={index} className="py-2 pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="relative rounded-md border-2 border-[#1d1d] p-2">
-                    <img
-                      className='w-40 h-40 object-center rounded-md'
-                      src={src}
-                      alt={`Image Preview ${index + 1}`}
+                  <div className="relative rounded-md border-2 border-slate-500 p-2">
+                    <ImageItem
+                      customStyle='w-32 h-32 object-center rounded-md'
+                      imageSrc={src}
+                      imageAlt={`Image Preview ${index + 1}`}
                     />
                     <div
                       onClick={() => handleRemoveImage(index)}
@@ -152,7 +155,7 @@ function DragDropFileUpload({ uploadCollectionEpic }) {
           </Carousel>
           <DialogFooter>
             <Button onClick={handleUploadFiles}>Upload</Button>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button variant="destructive" onClick={handleClose}>Cancel</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

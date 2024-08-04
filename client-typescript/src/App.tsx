@@ -16,8 +16,7 @@ import NotFoundError from './features/errors/not-found-error';
 import SignInScreen from './features/login';
 import MainScreen from './features/main';
 import Footer from './components/footer';
-import logo from './assets/img/logo.png'
-import { ImageItem } from './components/ImageItem';
+import ResetPassword from './features/resetpass';
 
 const url = `http://localhost:${import.meta.env.VITE_SOCKET_PORT}`;
 const socket = io(url);
@@ -48,18 +47,16 @@ function App() {
   return (
     <div className="min-w-full min-h-screen duration-300 bg-[#1D1D1D]">
       {!authToken ? (
-        <SignInScreen />
+        <Routes>
+          <Route path="*" index element={<SignInScreen />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
+        </Routes>
       ) : (
         <React.Fragment>
           {authToken &&
             <React.Fragment>
               <div className="flex justify-between">
-                <div className="flex flex-col">
-                  <div className="flex justify-center items-center bg-[#272727]">
-                    <ImageItem imageSrc={logo} imageAlt='logo' customStyle='object-cover w-12 h-12 md:w-24 md:h-24 m-2 rounded-full bg-none md:bg-[#1D1D1D]' />
-                  </div>
-                  <Sidebar />
-                </div>
+                <Sidebar />
                 <Routes>
                   <Route path="/" index element={<MainScreen />} />
                   <Route path="/collection" element={<CollectionScreen socket={socket} />} />

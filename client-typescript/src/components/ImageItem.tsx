@@ -12,7 +12,7 @@ export const ImageItem = ({ imageSrc, imageAlt, customStyle = null }: IImgaeItem
         src={imageSrc ? imageSrc : defaultImg}
         alt={imageAlt}
         loading="lazy"
-        className={`${customStyle ? customStyle : 'w-48 h-48 rounded-lg object-cover'}`}
+        className={`${customStyle ? customStyle : 'w-40 h-40 rounded-lg object-cover'}`}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import { useAuthStore } from '../login/epic';
 import { IFriendStore } from './epic/interface';
 import { IAuthenStore } from '../login/epic/interface';
 import userImg from '@/assets/img/user.jfif'
+import { ImageItem } from '@/components/ImageItem';
 
 function FriendScreen({ socket }) {
   const [searchText, setSearchText] = useState('');
@@ -68,12 +69,12 @@ function FriendScreen({ socket }) {
             (friend) => friend.email.includes(searchText) || friend.username.includes(searchText),
           )
           .map((friend) => (
-            <ListGroup.Item key={friend.email} className="flex justify-between py-4 ">
+            <ListGroup.Item key={friend.email} className="flex justify-between py-4">
               <div className="flex items-center gap-x-4">
-                <img
-                  className="h-12 w-12 object-cover flex-none rounded-full bg-gray-50"
-                  src={friend.avatar ? friend.avatar : userImg}
-                  alt="Friend's avatar"
+                <ImageItem
+                  customStyle="h-12 w-12 object-cover flex-none rounded-full bg-gray-50"
+                  imageSrc={friend.avatar ? friend.avatar : userImg}
+                  imageAlt="Friend's avatar"
                 />
                 <div className="min-w-0 flex-auto">
                   <p className="mt-1 truncate text-sm font-semibold leading-5 text-#[ABF600] overflow-ellipsis">{friend.email}</p>

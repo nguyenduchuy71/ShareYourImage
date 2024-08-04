@@ -49,7 +49,6 @@ python src/main.py
 - **Real-Time Image Sharing**: WebSocket integration for real-time image sharing between users.
 - **Database Management**: PostgreSQL for robust and scalable database management.
 - **ORM**: Object-Relational Mapping (ORM) for seamless interaction with the database.
-- **Message Broker**: Kafka for handling real-time messaging and event streaming.
 - **Containerization**: Docker for containerizing the application, ensuring consistency across different environments.
 
 ## Technologies Used
@@ -74,10 +73,6 @@ python src/main.py
 ### SQLAlchemy
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a SQL toolkit and Object-Relational Mapping (ORM) library for Python. It provides a full suite of well-known enterprise-level persistence patterns, designed for efficient and high-performing database access.
-
-### Kafka
-
-[Kafka](https://kafka.apache.org/) is a distributed event streaming platform capable of handling trillions of events a day. It is used in this project to manage real-time messaging and event streaming.
 
 ### Docker
 

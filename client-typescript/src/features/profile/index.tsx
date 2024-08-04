@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import userImg from '@/assets/img/user.jfif'
 import CustomScreen from '@/components/CustomScreen';
 import { ImageItem } from '@/components/ImageItem';
+import { Button } from '@/components/ui/button';
 
 export default function ProfileScreen() {
   const [username, setUsername] = useState("");
@@ -52,7 +53,6 @@ export default function ProfileScreen() {
   return (
     <CustomScreen>
       <div className="w-full rounded-sm bg-[url('https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png')] bg-cover bg-center bg-no-repeat items-center">
-
         <div className="my-2 flex justify-center relative py-2">
           <ImageItem
             imageSrc={avatar ? avatar : userImg}
@@ -60,9 +60,9 @@ export default function ProfileScreen() {
             customStyle='w-44 h-44 rounded-full object-center inline-block'
           />
 
-          <div className="absolute bottom-0 right-2">
-            <button onClick={handleClick}>
-              <input
+          <div className="absolute bottom-0 right-0">
+            <Button variant='link' onClick={handleClick} className="bg-transparent hover:opacity-80">
+              <Input
                 id="upload_profile"
                 name="file-upload"
                 type="file"
@@ -72,8 +72,8 @@ export default function ProfileScreen() {
                 multiple={false}
                 className="hidden"
               />
-              <CameraIcon className="h-8 w-8 hover:opacity-100 opacity-80 text-[#ABF600]" />
-            </button>
+              <CameraIcon className="h-8 w-8 text-[#ABF600]" />
+            </Button>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ function CollectionScreen({ socket }) {
   };
 
   return (
-    <div className="w-full h-full overflow-hidden mx-auto max-w-2xl p-6 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+    <div className="lg:w-[72%] md:w-[80%] sm:w-[100%] xs:w-[100%] h-full overflow-hidden mx-auto p-6">
       <div>
         <p className="mb-2 text-pretty text-lg font-semibold">Upload new images</p>
         <DragDropFileUpload uploadCollectionEpic={uploadCollectionEpic} />
