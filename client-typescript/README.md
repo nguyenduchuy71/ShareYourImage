@@ -17,7 +17,7 @@ To get started with the project, follow these steps:
     ```sh
     https://github.com/nguyenduchuy71/ShareYourImage
     ```
-2. Navigate into the project directory:
+2. Navigate into the client-typescript directory:
     ```sh
     cd client-typescript
     ```
@@ -63,3 +63,11 @@ npm run dev
 ### Firebase Storage
 
 [Firebase Storage](https://firebase.google.com/products/storage) provides secure file uploads and downloads for Firebase apps. It is backed by Google Cloud Storage and offers robust and scalable object storage solutions. Firebase Storage is easy to integrate with other Firebase services and provides a simple and efficient way to handle user-generated content, such as photos and videos.
+
+### Socket IO
+
+[Socket IO](https://socket.io/docs/v4/client-api/) is a library that enables low-latency, bidirectional and event-based communication between a client and a server.
+
+### Shadcn UI
+
+[Shadcn UI](https://ui.shadcn.com/) is a beautiful designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.

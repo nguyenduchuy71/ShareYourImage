@@ -17,7 +17,7 @@ To get started with the project, follow these steps:
     ```sh
     https://github.com/nguyenduchuy71/ShareYourImage
     ```
-2. Navigate into the project directory:
+2. Navigate into the server directory:
     ```sh
     cd server
     ```
@@ -46,7 +46,6 @@ python src/main.py
 ## Features
 
 - **User Authentication**: Secure user authentication using JWT tokens.
-- **Real-Time Image Sharing**: WebSocket integration for real-time image sharing between users.
 - **Database Management**: PostgreSQL for robust and scalable database management.
 - **ORM**: Object-Relational Mapping (ORM) for seamless interaction with the database.
 - **Containerization**: Docker for containerizing the application, ensuring consistency across different environments.
@@ -65,10 +64,6 @@ python src/main.py
 ### PostgreSQL
 
 [PostgreSQL](https://www.postgresql.org/) is a powerful, open source object-relational database system with over 30 years of active development. It is known for its reliability, robustness, and performance.
-
-### WebSocket
-
-[WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) is a protocol providing full-duplex communication channels over a single TCP connection. This project uses WebSocket to enable real-time communication between the server and clients.
 
 ### SQLAlchemy
 
