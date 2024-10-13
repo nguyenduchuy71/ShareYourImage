@@ -40,14 +40,10 @@ npm start
 
 ## Technologies Used
 
-### NodeJS
-
-[NodeJS](https://nodejs.org) is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts.
-
-### WebSocket
-
-[WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) is a protocol providing full-duplex communication channels over a single TCP connection. This project uses WebSocket to enable real-time communication between the server and clients.
-
-### Docker
-
-[Docker](https://www.docker.com/) is a distributed event streaming platform capable of handling trillions of events a day. It is used in this project to manage real-time messaging and event streaming.
+<div align="left">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" marginRight="10" alt="nodejs logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" marginRight="10" alt="javascript logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" height="40" alt="socketio logo" />
+</div>
