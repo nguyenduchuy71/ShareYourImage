@@ -44,30 +44,20 @@ npm run dev
 
 ## Technologies Used
 
-### ReactJS
-
-[ReactJS](https://reactjs.org/) is a popular JavaScript library for building user interfaces. It allows developers to create large web applications that can update and render efficiently in response to data changes. React's component-based architecture makes it easy to build reusable UI components.
-
-### TypeScript
-
-[TypeScript](https://www.typescriptlang.org/) is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale. By adding static types, TypeScript improves developer productivity and code maintainability. It helps catch errors early through type checking and provides powerful IDE features like auto-completion and refactoring.
-
-### TailwindCSS
-
-[TailwindCSS](https://tailwindcss.com/) is a utility-first CSS framework that provides low-level utility classes to build custom designs directly in your markup. It enables rapid UI development and eliminates the need for custom CSS. With its responsive design utilities and extensive configurability, TailwindCSS helps streamline the styling process.
-
-### Zustand
-
-[Zustand](https://github.com/pmndrs/zustand) is a small, fast, and scalable state management library for React applications. It provides a simple API to manage and update state without the boilerplate typically associated with state management libraries. Zustand’s minimalistic approach and optimized performance make it an excellent choice for managing state in React applications.
-
-### Firebase Storage
-
-[Firebase Storage](https://firebase.google.com/products/storage) provides secure file uploads and downloads for Firebase apps. It is backed by Google Cloud Storage and offers robust and scalable object storage solutions. Firebase Storage is easy to integrate with other Firebase services and provides a simple and efficient way to handle user-generated content, such as photos and videos.
-
-### Socket IO
-
-[Socket IO](https://socket.io/docs/v4/client-api/) is a library that enables low-latency, bidirectional and event-based communication between a client and a server.
-
-### Shadcn UI
-
-[Shadcn UI](https://ui.shadcn.com/) is a beautiful designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+<div align="left">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" height="40" alt="html5 logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" height="40" alt="css3 logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="javascript_badge logo"  />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" height="40" marginRight="10" alt="react logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height="40" marginRight="10" alt="redux logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original-wordmark.svg" height="40" alt="firebase logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" height="40" alt="firebase logo" />
+    <img width="12" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" height="40" alt="docker logo" />
+</div>
